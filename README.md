@@ -2,6 +2,9 @@
 
 Android app to collect data to be analyzed for medical purposes.
 
+![Main screen](/prototype/main.png)
+![Daily test](/prototype/test.png)
+
 
 ## Requirements
 
