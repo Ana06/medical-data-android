@@ -1,0 +1,88 @@
+<resources>
+    <string name="app_name">ExampleApp</string>
+
+    <!-- activity_main -->
+    <string name="insert_pin">INSERTA EL PIN</string>
+    <string name="start">COMENZAR</string>
+    <string name="start_change">CAMBIAR RESPUESTAS</string>
+    <string name="pin_error">El pin no es correcto</string>
+
+    <!-- activity_main_first_time -->
+    <string name="with_code">TENGO CÓDIGO</string>
+    <string name="without_code">NO TENGO CÓDIGO</string>
+
+    <!-- register_with_code_activity -->
+    <string name="insert_code">INTRODUCE EL CÓDIGO PROPORCIONADO POR TU MÉDICO</string>
+    <string name="next">SIGUIENTE</string>
+
+    <!-- register -->
+    <string name="name">NOMBRE</string>
+    <string name="email">EMAIL</string>
+    <string name="age">EDAD</string>
+    <string name="gender">SEXO</string>
+    <string name="female">MUJER</string>
+    <string name="male">HOMBRE</string>
+    <string name="pin">PIN (4 dígitos)</string>
+    <string name="pin2">REPITE EL PIN</string>
+    <string name="terms1">He leido y acepto los</string>
+    <string name="terms2">términos y condiciones legales</string>
+    <string name="register">REGISTRARSE</string>
+
+    <!-- register errors -->
+    <string name="name_blank">El nombre es obligatorio. Puedes usar un nickname si no quieres proporcionar tu nombre real.</string>
+    <string name="email_blank">El email es obligatorio. Escribe un email real.</string>
+    <string name="email_format">El email no es correcto.</string>
+    <string name="age_blank">La edad es obligatoria.</string>
+    <string name="gender_blank">Debes seleccionar tu sexo.</string>
+    <string name="pin_format">El PIN es obligatorio y debe tener 4 dígitos.</string>
+    <string name="pin2_format">El PIN no coincide.</string>
+    <string name="terms_blank">Debes aceptar los terminos y condiciones.</string>
+
+    <!-- finish_register_activity -->
+    <string name="thanks_register">¡Gracias! El registro se ha completado satisfactoriamente</string>
+    <string name="register_finished">COMENZAR</string>
+
+    <!-- test_activity -->
+    <string name="help">Ayuda</string>
+    <string name="yes">Sí</string>
+    <string name="no">No</string>
+
+    <string name="question1">Estado afectivo</string>
+    <string name="question2">Motivación</string>
+    <string name="question3">Concentración</string>
+    <string name="question4">Ansiedad</string>
+    <string name="question5">Irritabilidad</string>
+    <string name="question6">Calidad del sueño</string>
+    <string name="question7">Menstruación</string>
+    <string name="question8">Alcohol</string>
+    <string name="question9">Cigarrillos</string>
+    <string name="question10">Otras drogas</string>
+    <string name="question11">Hora de acostarse</string>
+    <string name="question12">Hora de dormirse</string>
+    <string name="question13">Hora de despertarse</string>
+
+    <string name="send">ENVIAR</string>
+
+    <string name="test_error">Debes contestar a todas las preguntas</string>
+
+    <!-- help_activity -->
+    <string name="help1">Help Estado afectivo df df dsf sdf dsf dsf kdlfjsdo dskjfd fdsjkf dskf jdslk jflkds jflks fjk sjflks jfklsjd klfjdlks jfkldsfj dlksfj lksdfj kldsfj dkslfj sdklfj dsklf jkldfj dsklfsdiokf jsdifdsiof jsdiofsdiof jdskjdslk jfkldsjfk kl djkfdjklfsflkgjpasg jdfi ijjgiksjdgkfdjgkdf   jklfdj gklf gjf  fdjkf jkvdfbjfi fdjk jkhjfkjd llkf dlf jdslf jdklf jdslkf jdk fjdklsjf lkdsfj lkdsjfkldj fdklsfjdklsf jkdlfj dklfj dklf jdskl jdkslfj lkdf jdklf jdklfj dklsfj dklsfj dlkfsj dklsfjdlks fjdklfjdlkfj dlksfjlkdsj flkdfj kldsfj kldfj lk df df dsf sdf dsf dsf kdlfjsdo dskjfd fdsjkf dskf jdslk jflkds jflks fjk sjflks jfklsjd klfjdlks jfkldsfj dlksfj lksdfj kldsfj dkslfj sdklfj dsklf jkldfj dsklfsdiokf jsdifdsiof jsdiofsdiof jdskjdslk jfkldsjfk kl djkfdjklfsflkgjpasg jdfi ijjgiksjdgkfdjgkdf   jklfdj gklf gjf  fdjkf jkvdfbjfi fdjk jkhjfkjd llkf dlf jdslf jdklf jdslkf jdk fjdklsjf lkdsfj lkdsjfkldj fdklsfjdklsf jkdlfj dklfj dklf jdskl jdkslfj lkdf jdklf jdklfj dklsfj dklsfj dlkfsj dklsfjdlks fjdklfjdlkfj dlksfjlkdsj flkdfj kldsfj kldfj lk</string>
+    <string name="help2">Help Motivación</string>
+    <string name="help3">Help Concentración</string>
+    <string name="help4">Help Ansiedad</string>
+    <string name="help5">Help Irritabilidad</string>
+    <string name="help6">Help Calidad del sueño</string>
+    <string name="help7">Help Menstruación</string>
+    <string name="help8">Help Alcohol</string>
+    <string name="help9">Help Cigarrillos</string>
+    <string name="help10">Help Otras drogas</string>
+    <string name="help11">Help Hora de acostarse</string>
+    <string name="help12">Help Hora de dormirse</string>
+    <string name="help13">Help Hora de despertarse</string>
+
+    <string name="terms_text">Bla bla bla df dsf sdf dsf dsf kdlfjsdo dskjfd fdsjkf dskf jdslk jflkds jflks fjk sjflks jfklsjd klfjdlks jfkldsfj dlksfj lksdfj kldsfj dkslfj sdklfj dsklf jkldfj dsklfsdiokf jsdifdsiof jsdiofsdiof jdskjdslk jfkldsjfk kl djkfdjklfsflkgjpasg jdfi ijjgiksjdgkfdjgkdf   jklfdj gklf gjf  fdjkf jkvdfbjfi fdjk jkhjfkjd llkf dlf jdslf jdklf jdslkf jdk fjdklsjf lkdsfj lkdsjfkldj fdklsfjdklsf jkdlfj dklfj dklf jdskl jdkslfj lkdf jdklf jdklfj dklsfj dklsfj dlkfsj dklsfjdlks fjdklfjdlkfj dlksfjlkdsj flkdfj kldsfj kldfj lk df df dsf sdf dsf dsf kdlfjsdo dskjfd fdsjkf dskf jdslk jflkds jflks fjk sjflks jfklsjd klfjdlks jfkldsfj dlksfj lksdfj kldsfj dkslfj sdklfj dsklf jkldfj dsklfsdiokf jsdifdsiof jsdiofsdiof jdskjdslk jfkldsjfk kl djkfdjklfsflkgjpasg jdfi ijjgiksjdgkfdjgkdf   jklfdj gklf gjf  fdjkf jkvdfbjfi fdjk jkhjfkjd llkf dlf jdslf jdklf jdslkf jdk fjdklsjf lkdsfj lkdsjfkldj fdklsfjdklsf jkdlfj dklfj dklf jdskl jdkslfj lkdf jdklf jdklfj dklsfj dklsfj dlkfsj dklsfjdlks fjdklfjdlkfj dlksfjlkdsj flkdfj kldsfj kldfj lk</string>
+
+    <!-- finish_activity -->
+    <string name="thanks">¡Gracias! Los datos se han enviado correctamente</string>
+    <string name="change">CAMBIAR RESPUESTAS</string>
+</resources>

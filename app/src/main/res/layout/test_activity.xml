@@ -1,0 +1,698 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        tools:context="${relativePackage}.${activityClass}">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin" >
+
+
+            <!-- question 1 - text -->
+            <TextView
+                android:id="@+id/question1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/question1"
+                android:layout_marginTop="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <!-- question 1 - help icon -->
+            <ImageView
+                android:id="@+id/question1_help"
+                android:src="@android:drawable/ic_menu_help"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/question1"
+                android:layout_toEndOf="@+id/question1"
+                android:layout_toRightOf="@+id/question1"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:contentDescription="@+id/help"
+                android:onClick="btnHelp"/>
+
+            <!-- question 1 - horizontal line -->
+            <View
+                android:id="@+id/question1_hl"
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:background="#c0c0c0"
+                android:layout_below="@+id/question1_help"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <!-- question 1 - rating  -->
+            <com.example.ana.exampleapp.RatingStars7
+                android:id="@+id/question1_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/question1_hl"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"/>
+
+            <!-- question 2 - text -->
+            <TextView
+                android:id="@+id/question2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/question2"
+                android:layout_below="@+id/question1_rating"
+                android:layout_marginTop="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <!-- question 2 - help icon -->
+            <ImageView
+                android:id="@+id/question2_help"
+                android:src="@android:drawable/ic_menu_help"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/question2"
+                android:layout_toEndOf="@+id/question2"
+                android:layout_toRightOf="@+id/question2"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:contentDescription="@+id/help"
+                android:onClick="btnHelp" />
+
+            <!-- question 2 - horizontal line -->
+            <View
+                android:id="@+id/question2_hl"
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:background="#c0c0c0"
+                android:layout_below="@+id/question2_help"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+
+            <!-- question 2 - rating  -->
+            <com.example.ana.exampleapp.RatingStars7
+                android:id="@+id/question2_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/question2_hl"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"/>
+
+            <!-- question 3 - text -->
+            <TextView
+                android:id="@+id/question3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/question3"
+                android:layout_below="@+id/question2_rating"
+                android:layout_marginTop="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:stepSize="1"/>
+
+            <!-- question 3 - help icon -->
+            <ImageView
+                android:id="@+id/question3_help"
+                android:src="@android:drawable/ic_menu_help"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/question3"
+                android:layout_toEndOf="@+id/question3"
+                android:layout_toRightOf="@+id/question3"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:contentDescription="@+id/help"
+                android:onClick="btnHelp" />
+
+            <!-- question 3 - horizontal line -->
+            <View
+                android:id="@+id/question3_hl"
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:background="#c0c0c0"
+                android:layout_below="@+id/question3_help"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <!-- question 3 - rating  -->
+            <com.example.ana.exampleapp.RatingStars5
+                android:id="@+id/question3_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/question3_hl"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"/>
+
+            <!-- question 4 - text -->
+            <TextView
+                android:id="@+id/question4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/question4"
+                android:layout_below="@+id/question3_rating"
+                android:layout_marginTop="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <!-- question 4 - help icon -->
+            <ImageView
+                android:id="@+id/question4_help"
+                android:src="@android:drawable/ic_menu_help"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/question4"
+                android:layout_toEndOf="@+id/question4"
+                android:layout_toRightOf="@+id/question4"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:contentDescription="@+id/help"
+                android:onClick="btnHelp"/>
+
+            <!-- question 4 - horizontal line -->
+            <View
+                android:id="@+id/question4_hl"
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:background="#c0c0c0"
+                android:layout_below="@+id/question4_help"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <!-- question 4 - rating  -->
+            <com.example.ana.exampleapp.RatingStars5
+                android:id="@+id/question4_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/question4_hl"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"/>
+
+            <!-- question 5 - text -->
+            <TextView
+                android:id="@+id/question5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/question5"
+                android:layout_below="@+id/question4_rating"
+                android:layout_marginTop="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <!-- question 5 - help icon -->
+            <ImageView
+                android:id="@+id/question5_help"
+                android:src="@android:drawable/ic_menu_help"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/question5"
+                android:layout_toEndOf="@+id/question5"
+                android:layout_toRightOf="@+id/question5"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:contentDescription="@+id/help"
+                android:onClick="btnHelp"/>
+
+            <!-- question 5 - horizontal line -->
+            <View
+                android:id="@+id/question5_hl"
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:background="#c0c0c0"
+                android:layout_below="@+id/question5_help"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <!-- question 5 - rating  -->
+            <com.example.ana.exampleapp.RatingStars5
+                android:id="@+id/question5_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/question5_hl"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"/>
+
+            <!-- question 6 - text -->
+            <TextView
+                android:id="@+id/question6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/question6"
+                android:layout_below="@+id/question5_rating"
+                android:layout_marginTop="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <!-- question 6 - help icon -->
+            <ImageView
+                android:id="@+id/question6_help"
+                android:src="@android:drawable/ic_menu_help"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/question6"
+                android:layout_toEndOf="@+id/question6"
+                android:layout_toRightOf="@+id/question6"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:contentDescription="@+id/help"
+                android:onClick="btnHelp"/>
+
+            <!-- question 6 - horizontal line -->
+            <View
+                android:id="@+id/question6_hl"
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:background="#c0c0c0"
+                android:layout_below="@+id/question6_help"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <!-- question 6 - rating  -->
+            <com.example.ana.exampleapp.RatingStars5
+                android:id="@+id/question6_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/question6_hl"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"/>
+
+            <RelativeLayout
+                android:id="@+id/question7_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/question6_rating">
+            <!-- question 7 - text -->
+                <TextView
+                    android:id="@+id/question7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/question7"
+                    android:layout_marginTop="20dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <!-- question 7 - help icon -->
+                <ImageView
+                    android:id="@+id/question7_help"
+                    android:src="@android:drawable/ic_menu_help"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/question7"
+                    android:layout_toEndOf="@+id/question7"
+                    android:layout_toRightOf="@+id/question7"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:contentDescription="@+id/help"
+                    android:onClick="btnHelp"/>
+
+                <!-- question 7 - horizontal line -->
+                <View
+                    android:id="@+id/question7_hl"
+                    android:layout_width="fill_parent"
+                    android:layout_height="2dp"
+                    android:background="#c0c0c0"
+                    android:layout_below="@+id/question7_help"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <!-- question 7 - rating  -->
+                <RadioGroup
+                    android:id="@+id/question7_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/question7_hl"
+                    android:layout_marginTop="15dp"
+                    android:layout_centerHorizontal="true"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/question7_rating_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/no" />
+
+                    <RadioButton
+                        android:id="@+id/question7_rating_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/yes"
+                        android:layout_marginLeft="70dp"
+                        android:layout_marginStart="70dp"/>
+
+                </RadioGroup>
+            </RelativeLayout>
+
+            <!-- question 8 - text -->
+            <TextView
+                android:id="@+id/question8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/question8"
+                android:layout_below="@+id/question7_layout"
+                android:layout_marginTop="30dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <!-- question 8 - help icon -->
+            <ImageView
+                android:id="@+id/question8_help"
+                android:src="@android:drawable/ic_menu_help"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/question8"
+                android:layout_toEndOf="@+id/question8"
+                android:layout_toRightOf="@+id/question8"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:contentDescription="@+id/help"
+                android:onClick="btnHelp"/>
+
+            <!-- question 8 - horizontal line -->
+            <View
+                android:id="@+id/question8_hl"
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:background="#c0c0c0"
+                android:layout_below="@+id/question8_help"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <!-- question 8 - rating  -->
+
+            <EditText
+                android:id="@+id/question8_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:layout_below="@+id/question8_hl"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp" />
+
+
+            <!-- question 9 - text -->
+            <TextView
+                android:id="@+id/question9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/question9"
+                android:layout_below="@+id/question8_rating"
+                android:layout_marginTop="25dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <!-- question 9 - help icon -->
+            <ImageView
+                android:id="@+id/question9_help"
+                android:src="@android:drawable/ic_menu_help"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/question9"
+                android:layout_toEndOf="@+id/question9"
+                android:layout_toRightOf="@+id/question9"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:contentDescription="@+id/help"
+                android:onClick="btnHelp"/>
+
+            <!-- question 9 - horizontal line -->
+            <View
+                android:id="@+id/question9_hl"
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:background="#c0c0c0"
+                android:layout_below="@+id/question9_help"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <!-- question 9 - rating  -->
+
+            <EditText
+                android:id="@+id/question9_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:layout_below="@+id/question9_hl"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp" />
+
+            <!-- question 10 - text -->
+            <TextView
+                android:id="@+id/question10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/question10"
+                android:layout_below="@+id/question9_rating"
+                android:layout_marginTop="25dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <!-- question 10 - help icon -->
+            <ImageView
+                android:id="@+id/question10_help"
+                android:src="@android:drawable/ic_menu_help"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/question10"
+                android:layout_toEndOf="@+id/question10"
+                android:layout_toRightOf="@+id/question10"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:contentDescription="@+id/help"
+                android:onClick="btnHelp"/>
+
+            <!-- question 10 - horizontal line -->
+            <View
+                android:id="@+id/question10_hl"
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:background="#c0c0c0"
+                android:layout_below="@+id/question10_help"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <!-- question 10 - rating  -->
+            <RadioGroup
+                android:id="@+id/question10_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/question10_hl"
+                android:layout_marginTop="15dp"
+                android:layout_centerHorizontal="true"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/question10_rating_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no" />
+
+                <RadioButton
+                    android:id="@+id/question10_rating_yes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/yes"
+                    android:layout_marginLeft="70dp"
+                    android:layout_marginStart="70dp"/>
+
+            </RadioGroup>
+
+            <!-- question 11 - text -->
+            <TextView
+                android:id="@+id/question11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/question11"
+                android:layout_below="@+id/question10_rating"
+                android:layout_marginTop="30dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <!-- question 11 - help icon -->
+            <ImageView
+                android:id="@+id/question11_help"
+                android:src="@android:drawable/ic_menu_help"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/question11"
+                android:layout_toEndOf="@+id/question11"
+                android:layout_toRightOf="@+id/question11"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:contentDescription="@+id/help"
+                android:onClick="btnHelp"/>
+
+            <!-- question 11 - horizontal line -->
+            <View
+                android:id="@+id/question11_hl"
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:background="#c0c0c0"
+                android:layout_below="@+id/question11_help"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <!-- question 11 - rating  -->
+
+            <TimePicker
+                android:id="@+id/question11_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:layout_below="@+id/question11_hl"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp" />
+
+
+            <!-- question 11 - text -->
+            <TextView
+                android:id="@+id/question12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/question12"
+                android:layout_below="@+id/question11_rating"
+                android:layout_marginTop="30dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <!-- question 12 - help icon -->
+            <ImageView
+                android:id="@+id/question12_help"
+                android:src="@android:drawable/ic_menu_help"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/question12"
+                android:layout_toEndOf="@+id/question12"
+                android:layout_toRightOf="@+id/question12"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:contentDescription="@+id/help"
+                android:onClick="btnHelp"/>
+
+            <!-- question 12 - horizontal line -->
+            <View
+                android:id="@+id/question12_hl"
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:background="#c0c0c0"
+                android:layout_below="@+id/question12_help"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <!-- question 12 - rating  -->
+
+            <TimePicker
+                android:id="@+id/question12_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:layout_below="@+id/question12_hl"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp" />
+
+            <!-- question 13 - text -->
+            <TextView
+                android:id="@+id/question13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/question13"
+                android:layout_below="@+id/question12_rating"
+                android:layout_marginTop="30dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <!-- question 13 - help icon -->
+            <ImageView
+                android:id="@+id/question13_help"
+                android:src="@android:drawable/ic_menu_help"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/question13"
+                android:layout_toEndOf="@+id/question13"
+                android:layout_toRightOf="@+id/question13"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:contentDescription="@+id/help"
+                android:onClick="btnHelp"/>
+
+            <!-- question 13 - horizontal line -->
+            <View
+                android:id="@+id/question13_hl"
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:background="#c0c0c0"
+                android:layout_below="@+id/question13_help"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <!-- question 13 - rating  -->
+
+            <TimePicker
+                android:id="@+id/question13_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:layout_below="@+id/question13_hl"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp" />
+
+            <!-- horizontal line -->
+            <View
+                android:id="@+id/finish_hl"
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:background="#c0c0c0"
+                android:layout_below="@+id/question13_rating"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="50dp"/>
+
+            <!-- button to send answers -->
+            <Button
+                android:id="@+id/button_finish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/send"
+                android:layout_below="@+id/finish_hl"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:onClick="btnFinish"/>
+
+            <!-- Text for errors -->
+            <TextView
+                android:id="@+id/errors"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text=""
+                android:layout_below="@+id/button_finish"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="40dp"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:textColor="@color/colorPrimary"/>
+
+        </RelativeLayout>
+    </ScrollView>
+
