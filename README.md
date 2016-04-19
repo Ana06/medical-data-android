@@ -1,6 +1,6 @@
 # Android app to collect medical data
 
-Android app to collect data to be analyzed for medical purposes.
+Android app to collect data to be analyzed for medical purposes. Android Studio is being used to develop the app. ExampleApp.apk can be used to install the app in your Android device.
 
 ![Main screen](/prototype/main.png)
 ![Daily test](/prototype/test.png)
