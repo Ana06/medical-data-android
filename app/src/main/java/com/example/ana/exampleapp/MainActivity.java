@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.view.View;
+import android.view.View.OnFocusChangeListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.database.Cursor;
@@ -18,11 +19,13 @@ import android.database.sqlite.SQLiteDatabase;
  *
  * @author Ana María Martínez Gómez
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnFocusChangeListener{
     //settings, mDbHelper, readable_db and projection are used repeatedly
     SharedPreferences settings;
     SQLiteDatabase readable_db;
     String[] projection = {FeedTestContract.FeedEntry.COLUMN_NAME_TIMESTAMP};
+    long startTime = -1;
+    EditText pinEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onRestart(){
         super.onRestart();
+        startTime = -1;
         setMainView();
     }
 
@@ -65,22 +69,26 @@ public class MainActivity extends AppCompatActivity {
                 Button button = (Button) findViewById(R.id.button_start);
                 button.setText(getString(R.string.start_change));
             }
+
+            pinEditText = (EditText) findViewById(R.id.pin);
+            pinEditText.setOnFocusChangeListener(this);
         }
     }
 
     /**
-     * Check if the introduced PIN is correct and in that case creates a {@link TestActivity}.
-     * Otherwise it set an error on the PIN {@link EditText}.
+     * Check if the introduced PIN is correct and in that case saves the time spent to do it and
+     * creates a {@link TestActivity}. Otherwise it set an error on the PIN {@link EditText}.
      *
      * @param view  the {@link View} that calls the method
      */
     public void btnStart(View view) {
         int pin = settings.getInt("pin", 0);
-        EditText pinEditText = (EditText) findViewById(R.id.pin);
         String pinText = pinEditText.getText().toString();
         if(!pinText.equals("") && pin == Integer.parseInt(pinText)) {
             //The PIN is correct
+            long pin_time = (System.nanoTime() - startTime) / 1000000; // in milliseconds
             Intent intent = new Intent(this, TestActivity.class);
+            intent.putExtra("PIN_TIME", pin_time);
             startActivity(intent);
         }
         else
@@ -90,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Creates a {@link RegisterActivity}
      *
-     * @param view  the {@link View} that calls the method
+     * @param view  the {@link View} clicked
      */
     public void btnRegister(View view) {
         Intent intent = new Intent(this, RegisterActivity.class);
@@ -98,13 +106,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Creates a {@link RegisterActivity} specifying that the user has got a code.
+     * Creates a {@link CodeRegisterActivity}.
      *
-     * @param view  the {@link View} that calls the method
+     * @param view  the {@link View} clicked
      */
     public void btnRegisterWithCode(View view) {
-        Intent intent = new Intent(this, RegisterActivity.class);
-        intent.putExtra("WITH_CODE", true);
+        Intent intent = new Intent(this, CodeRegisterActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onFocusChange(View v, boolean hasFocus) {
+        if(hasFocus && startTime == -1)
+            startTime = System.nanoTime(); // current timestamp in nanoseconds
     }
 }

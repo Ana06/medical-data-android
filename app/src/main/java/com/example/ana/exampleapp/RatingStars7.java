@@ -9,7 +9,7 @@ import android.widget.TextView;
 /**
  * Custom view for a rating bar made of 7 surrounded {@link TextView}s. They can be selected or not
  * and there is a special one whose border is pink. The possible answer values are: -3, -2, -1, 0,
- * 1, 2 and 3. 0 is the center value and it is painted accordingly.
+ * 1, 2 and 3. 0 is the center value and it is coloured accordingly.
  *
  * @author Ana María Martínez Gómez
  */

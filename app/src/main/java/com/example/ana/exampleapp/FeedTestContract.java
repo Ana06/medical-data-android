@@ -58,7 +58,8 @@ public final class FeedTestContract {
      * adaptors will expect it to have.
     */
     public static abstract class FeedEntry implements BaseColumns {
-        public static final String TABLE_NAME = "test";
+        public static final String TABLE_NAME = "test"; // Integer (minutes)
+        public static final String COLUMN_NAME_PIN = "pin_time"; // Values: -3,-2,-1,0,1,2,3
         public static final String COLUMN_NAME_Q1 = "affective_state"; // Values: -3,-2,-1,0,1,2,3
         public static final String COLUMN_NAME_Q2 = "motivation"; // Values: -3,-2,-1,0,1,2,3
         public static final String COLUMN_NAME_Q3 = "concentration"; // Values: 1,2,3,4,5

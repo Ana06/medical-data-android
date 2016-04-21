@@ -8,8 +8,7 @@ import android.widget.TextView;
 
 /**
  * Custom view for a rating bar made of 5 surrounded {@link TextView}s. They can be selected or not
- * and there is a special one whose border is pink. The possible answer values are: 1, 2, 3, 4 and
- * 5.
+ * and there is a special one whose border is pink. The possible answer values are: 1,2,3,4 and 5.
  *
  * @author Ana María Martínez Gómez
  */

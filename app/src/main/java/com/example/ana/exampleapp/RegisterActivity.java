@@ -1,13 +1,19 @@
 package com.example.ana.exampleapp;
 
 import java.lang.String;
+
+import android.graphics.Rect;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Build;
 import android.content.Intent;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.CheckBox;
@@ -20,8 +26,7 @@ import android.text.style.ClickableSpan;
 
 /**
  * This activity allows a user to register in the app by asking his name, email, age, gender and a
- * 4 numbers PIN. There are two different cases: when the users has got a code given by it doctor
- * and when he/she hasn't got it.
+ * 4 numbers PIN.
  *
  * @author Ana María Martínez Gómez
  */
@@ -30,34 +35,9 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent = getIntent();
-        Boolean withCode = intent.getBooleanExtra("WITH_CODE", false);
-        if(withCode)
-            setContentView(R.layout.register_with_code_activity);
-        else {
-            setRegisterForm();
-        }
-    }
-
-    /**
-     * Set the content view of the register form after introducing the code given by te user's
-     * doctor.
-     *
-     * @param view  the {@link View} clicked
-     */
-    public void btnRegister(View view) {
-        setRegisterForm();
-    }
-
-    /**
-     * Set the content view of the register form. It also allows the a part of a {@link String} (the
-     * terms and conditions) to be clickable.
-     *
-     * @see SpannableString
-     * @see MyClickableSpan
-     */
-    private void setRegisterForm(){
         setContentView(R.layout.register_activity);
+
+        //allow a part of the terms and conditions text to be clickable.
         TextView tv = (TextView) findViewById(R.id.terms_text);
         String terms1 = getString(R.string.terms1);
         String terms2 = getString(R.string.terms2);
@@ -80,14 +60,15 @@ public class RegisterActivity extends AppCompatActivity {
      * @see EditText#setError(CharSequence)
      */
     public void btnFinish(View view) {
-        EditText first_with_error = null;
+        boolean error = false;
 
         // check name correction
         EditText name = (EditText) findViewById(R.id.name_answer);
         String name_text = name.getText().toString();
         if(name_text.equals("")){
             name.setError(getString(R.string.name_blank));
-            first_with_error = name;
+            focusFirstError(name, R.id.name);
+            error = true;
         }
 
         // check email correction
@@ -95,14 +76,16 @@ public class RegisterActivity extends AppCompatActivity {
         String email_text = email.getText().toString();
         if(email_text.equals("")){
             email.setError(getString(R.string.email_blank));
-            if(first_with_error == null) {
-                first_with_error = email;
+            if(!error) {
+                focusFirstError(email, R.id.email);
+                error = true;
             }
         }
         else if (!email_text.matches(Variables.emailPattern)){
             email.setError(getString(R.string.email_format));
-            if(first_with_error == null) {
-                first_with_error = email;
+            if(!error) {
+                focusFirstError(email, R.id.email);
+                error = true;
             }
         }
 
@@ -110,8 +93,9 @@ public class RegisterActivity extends AppCompatActivity {
         EditText age = (EditText) findViewById(R.id.age_answer);
         if(age.getText().toString().equals("")) {
             age.setError(getString(R.string.age_blank));
-            if (first_with_error == null) {
-                first_with_error = age;
+            if(!error) {
+                focusFirstError(age, R.id.age);
+                error = true;
             }
         }
 
@@ -121,16 +105,18 @@ public class RegisterActivity extends AppCompatActivity {
         String pin_text = pin.getText().toString();
         if (pin_text.length() != 4) {
             pin.setError(getString(R.string.pin_format));
-            if (first_with_error == null) {
-                first_with_error = pin;
+            if(!error) {
+                focusFirstError(pin, R.id.pin);
+                error = true;
             }
         } else {
             // PIN2 correction is only checked if PIN is correct
             String pin2_text = pin2.getText().toString();
             if (!pin_text.equals(pin2_text)) {
                 pin2.setError(getString(R.string.pin2_format));
-                if (first_with_error == null) {
-                    first_with_error = pin2;
+                if(!error) {
+                    focusFirstError(pin2, R.id.pin2);
+                    error = true;
                 }
             }
         }
@@ -140,13 +126,14 @@ public class RegisterActivity extends AppCompatActivity {
         if(!terms.isChecked()) {
             TextView terms_error = (TextView) findViewById(R.id.terms_text);
             terms_error.setError("");
-            if (first_with_error == null) {
-                first_with_error = pin2;
+            if(!error) {
+                Variables.hideKeyboard(this);
+                error = true;
             }
         }
 
         // ¿Everything correct?
-        if (first_with_error == null) {
+        if (!error) {
             // Save register
             SharedPreferences settings = getSharedPreferences(Variables.PREFS_NAME, Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = settings.edit();
@@ -162,8 +149,23 @@ public class RegisterActivity extends AppCompatActivity {
             Intent intent = new Intent(this, FinishRegisterActivity.class);
             startActivity(intent);
             finish();
-        } else
-            first_with_error.requestFocus();
+        }
+    }
+
+    /**
+     * requests focus on a {@link EditText} allowing to see its title too. It is used to set focus on the
+     * first question with error.
+     *
+     * @param et        field we want to set focus in.
+     * @param tv_id     id of the {@link TextView} which is the title of et.
+     */
+    private void focusFirstError(EditText et, int tv_id){
+        et.clearFocus(); // requestRectangle does not work properly if et is focused
+        et.requestFocus();
+        TextView title = (TextView) findViewById(tv_id);
+        RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) title.getLayoutParams();
+        Rect rect = new Rect(0, -lp.topMargin, title.getWidth(), title.getHeight());
+        title.requestRectangleOnScreen(rect);
     }
 
     /**
