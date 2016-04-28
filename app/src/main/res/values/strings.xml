@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">ExampleApp</string>
 
+    <!-- menu -->
+    <string name="profile">Profile</string>
+    <string name="configuration">Configuration</string>
+    <string name="information">Information</string>
+
     <!-- activity_main -->
     <string name="insert_pin">INSERT THE PIN</string>
     <string name="start">START</string>
@@ -84,5 +89,11 @@
 
     <!-- finish_activity -->
     <string name="thanks">Thanks! Your answers have been correctly sent</string>
-    <string name="change">CHANGE ANSWERS</string>
+    <string name="change">ACCEPT</string>
+
+    <!-- profile_activity -->
+    <string name="introduce_pin">INTRODUCE YOUR PIN</string>
+    <string name="incorrect_pin">The pin is incorrect</string>
+    <string name="save_changes">SAVE CHANGES</string>
+    <string name="changes_saved">Changes have been saved</string>
 </resources>

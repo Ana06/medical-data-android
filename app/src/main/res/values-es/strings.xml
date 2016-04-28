@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">ExampleApp</string>
 
+    <!-- menu -->
+    <string name="profile">Perfil</string>
+    <string name="configuration">Ajustes</string>
+    <string name="information">Información</string>
+
     <!-- activity_main -->
     <string name="insert_pin">INSERTA EL PIN</string>
     <string name="start">COMENZAR</string>
@@ -84,5 +89,12 @@
 
     <!-- finish_activity -->
     <string name="thanks">¡Gracias! Los datos se han enviado correctamente</string>
-    <string name="change">CAMBIAR RESPUESTAS</string>
+    <string name="change">ACEPTAR</string>
+
+    <!-- profile_activity -->
+    <string name="introduce_pin">INTRODUCE EL PIN</string>
+    <string name="incorrect_pin">El PIN no es correcto</string>
+    <string name="save_changes">GUARDAR CAMBIOS</string>
+    <string name="changes_saved">Los cambios se han guardado</string>
+
 </resources>

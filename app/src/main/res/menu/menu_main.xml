@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/profile"
+        android:title="@string/profile"
+        android:showAsAction="ifRoom"/>
+    <item android:id="@+id/configuration"
+        android:title="@string/configuration" />
+    <item android:id="@+id/information"
+        android:title="@string/information" />
+</menu>

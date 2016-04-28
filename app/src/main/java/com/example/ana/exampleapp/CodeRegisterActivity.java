@@ -33,13 +33,15 @@ public class CodeRegisterActivity extends AppCompatActivity {
     }
 
     /**
-     * Creates a {@link RegisterActivity}
+     * Creates a {@link RegisterActivity} and finishes.
      *
      * @param view  the {@link View} clicked
+     * @see #finish()
      */
     public void btnRegister(View view) {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
+        finish();
     }
 
 

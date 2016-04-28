@@ -5,12 +5,15 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnFocusChangeListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.Toast;
 
 /**
  * Main activity of the app. It shows a view that creates a {@link RegisterActivity} if it is the
@@ -72,6 +75,47 @@ public class MainActivity extends AppCompatActivity implements OnFocusChangeList
 
             pinEditText = (EditText) findViewById(R.id.pin);
             pinEditText.setOnFocusChangeListener(this);
+        }
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        boolean firstTime = settings.getBoolean("firstTime", true);
+        menu.findItem(R.id.profile).setVisible(!firstTime);
+        menu.findItem(R.id.profile).setEnabled(!firstTime);
+        menu.findItem(R.id.configuration).setVisible(!firstTime);
+        return true;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        /* Inflate the menu; this adds items to the action bar if it isn't the first time the app is
+        used
+         */
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        Intent intent;
+        switch (item.getItemId()) {
+            case R.id.profile:
+                intent = new Intent(this, ProfileActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.configuration:
+                intent = new Intent(this, ConfigurationActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.information:
+                intent = new Intent(this, InformationActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 

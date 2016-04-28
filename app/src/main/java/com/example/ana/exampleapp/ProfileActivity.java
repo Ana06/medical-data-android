@@ -1,28 +1,24 @@
 package com.example.ana.exampleapp;
 
-import java.lang.String;
-
-import android.graphics.Rect;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.os.Build;
-import android.content.Intent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.RelativeLayout;
-import android.widget.ScrollView;
-import android.widget.TextView;
-import android.widget.EditText;
-import android.widget.CheckBox;
-import android.widget.RadioGroup;
+import android.graphics.Rect;
+import android.os.Build;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.SpannableString;
-import android.text.TextPaint;
 import android.text.Spanned;
+import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
+import android.view.View;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * This activity allows a user to register in the app by asking his name, email, age, gender and a
@@ -30,29 +26,44 @@ import android.text.style.ClickableSpan;
  *
  * @author Ana María Martínez Gómez
  */
-public class RegisterActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity {
+    String name;
+    String email;
+    int age;
+    boolean gender;
+    SharedPreferences settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.register_activity);
+        setContentView(R.layout.profile_activity);
 
-        //allow a part of the terms and conditions text to be clickable.
-        TextView tv = (TextView) findViewById(R.id.terms_text);
-        String terms1 = getString(R.string.terms1);
-        String terms2 = getString(R.string.terms2);
-        SpannableString ss = new SpannableString(terms1+ " " + terms2);
-        ss.setSpan(new MyClickableSpan(), terms1.length(), terms1.length()+terms2.length()+1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);//0 to 7 Android is clickable
-        tv.setText(ss);
-        tv.setMovementMethod(LinkMovementMethod.getInstance());
+        settings = getSharedPreferences(Variables.PREFS_NAME, Context.MODE_PRIVATE);
+        name = settings.getString("name", "");
+        EditText et = (EditText) findViewById(R.id.name_answer);
+        et.setText(name);
+        email = settings.getString("email", "");
+        et = (EditText) findViewById(R.id.email_answer);
+        et.setText(email);
+        age = settings.getInt("age", -1);
+        et = (EditText) findViewById(R.id.age_answer);
+        et.setText(String.valueOf(age));
+        // gender = false => male, gender = true => female
+        gender = settings.getBoolean("gender", true);
+        RadioGroup radioGroup = (RadioGroup) findViewById(R.id.gender_answer);
+        int radio;
+        if (gender)
+            radio = R.id.radio_female;
+        else
+            radio = R.id.radio_male;
+        radioGroup.check(radio);
     }
 
     /**
-     * To finish the register, saving the personal information and the PIN provided. It checks that
-     * all question have been answered and the terms and conditions agreed. In that case, it saves
-     * them, creates a {@link FinishRegisterActivity} and finish. Otherwise, it sets errors for all
-     * questions that haven't been answered or have been answered incorrectly and set focus on the
-     * first one with error.
+     * To finish the register, updating the personal information. It checks that all question have
+     * an answer and that the PIN is corrected. In that case, it saves them, creates a and finishes.
+     * Otherwise, it sets errors for all questions that haven't been answered or have been answered
+     * incorrectly and set focus on the first one with error.
      *
      * @param view  the clicked {@link View}.
      * @see #finish()
@@ -101,33 +112,12 @@ public class RegisterActivity extends AppCompatActivity {
 
         // check PIN correction
         EditText pin = (EditText) findViewById(R.id.pin_answer);
-        EditText pin2 = (EditText) findViewById(R.id.pin2_answer);
         String pin_text = pin.getText().toString();
-        if (pin_text.length() != 4) {
-            pin.setError(getString(R.string.pin_format));
+        String original_pin = String.valueOf(settings.getInt("pin", -1));
+        if (!pin_text.equals(original_pin)) {
+            pin.setError(getString(R.string.incorrect_pin));
             if(!error) {
                 focusFirstError(pin, R.id.pin);
-                error = true;
-            }
-        } else {
-            // PIN2 correction is only checked if PIN is correct
-            String pin2_text = pin2.getText().toString();
-            if (!pin_text.equals(pin2_text)) {
-                pin2.setError(getString(R.string.pin2_format));
-                if(!error) {
-                    focusFirstError(pin2, R.id.pin2);
-                    error = true;
-                }
-            }
-        }
-
-        // terms accepted
-        CheckBox terms = (CheckBox) findViewById(R.id.terms_check);
-        if(!terms.isChecked()) {
-            TextView terms_error = (TextView) findViewById(R.id.terms_text);
-            terms_error.setError("");
-            if(!error) {
-                Variables.hideKeyboard(this);
                 error = true;
             }
         }
@@ -143,11 +133,10 @@ public class RegisterActivity extends AppCompatActivity {
             // gender = false => male, gender = true => female
             RadioGroup radioGroup = (RadioGroup) findViewById(R.id.gender_answer);
             editor.putBoolean("gender", radioGroup.getCheckedRadioButtonId() == R.id.radio_female);
-            editor.putInt("pin", Integer.parseInt(pin_text));
             editor.commit();
 
-            Intent intent = new Intent(this, FinishRegisterActivity.class);
-            startActivity(intent);
+            Variables.hideKeyboard(this);
+            Toast.makeText(this, R.string.changes_saved, Toast.LENGTH_LONG).show();
             finish();
         }
     }
@@ -195,7 +184,7 @@ public class RegisterActivity extends AppCompatActivity {
          * @param textView  the {@link View} clicked
          */
         public void onClick(View textView) {
-            Intent intent = new Intent(RegisterActivity.this, HelpActivity.class);
+            Intent intent = new Intent(ProfileActivity.this, HelpActivity.class);
             intent.putExtra("QUESTION", getString(R.string.terms2));
             intent.putExtra("HELP", getString(R.string.terms_text));
             startActivity(intent);

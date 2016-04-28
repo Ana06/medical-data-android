@@ -58,21 +58,21 @@ public final class FeedTestContract {
      * adaptors will expect it to have.
     */
     public static abstract class FeedEntry implements BaseColumns {
-        public static final String TABLE_NAME = "test"; // Integer (minutes)
-        public static final String COLUMN_NAME_PIN = "pin_time"; // Values: -3,-2,-1,0,1,2,3
-        public static final String COLUMN_NAME_Q1 = "affective_state"; // Values: -3,-2,-1,0,1,2,3
+        public static final String TABLE_NAME = "test";
+        public static final String COLUMN_NAME_PIN = "speedReaction"; // Integer (milliseconds)
+        public static final String COLUMN_NAME_Q1 = "affectiveState"; // Values: -3,-2,-1,0,1,2,3
         public static final String COLUMN_NAME_Q2 = "motivation"; // Values: -3,-2,-1,0,1,2,3
         public static final String COLUMN_NAME_Q3 = "concentration"; // Values: 1,2,3,4,5
         public static final String COLUMN_NAME_Q4 = "anxiety"; // Values: 1,2,3,4,5
         public static final String COLUMN_NAME_Q5 = "irritability"; // Values: 1,2,3,4,5
-        public static final String COLUMN_NAME_Q6 = "sleep_quality"; // Values: 1,2,3,4,5
-        public static final String COLUMN_NAME_Q7 = "menstruation"; // Values: 0(no), 1(yes)
+        public static final String COLUMN_NAME_Q6 = "fatigue"; // Values: 1,2,3,4,5
+        public static final String COLUMN_NAME_Q7 = "menstrualPeriod"; // Values: 0(no), 1(yes)
         public static final String COLUMN_NAME_Q8 = "alcohol"; // Integer
-        public static final String COLUMN_NAME_Q9 = "cigarettes"; // Integer
-        public static final String COLUMN_NAME_Q10 = "other_drugs"; // Values: 0(no), 1(yes)
-        public static final String COLUMN_NAME_Q11 = "time_bed"; // Integer (minutes)
-        public static final String COLUMN_NAME_Q12 = "time_sleep"; // Integer (minutes)
-        public static final String COLUMN_NAME_Q13 = "time_wake_up"; // Integer (minutes)
+        public static final String COLUMN_NAME_Q9 = "tobacco"; // Integer
+        public static final String COLUMN_NAME_Q10 = "drugs"; // Values: 0(no), 1(yes)
+        public static final String COLUMN_NAME_Q11 = "timeBed"; // Integer (minutes)
+        public static final String COLUMN_NAME_Q12 = "timeSleep"; // Integer (minutes)
+        public static final String COLUMN_NAME_Q13 = "timeWakeUp"; // Integer (minutes)
         public static final String COLUMN_NAME_TIMESTAMP = "timestamp"; // Timestamp
     }
 
