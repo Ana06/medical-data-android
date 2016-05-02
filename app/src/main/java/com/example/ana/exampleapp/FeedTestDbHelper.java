@@ -13,7 +13,7 @@ import android.database.sqlite.SQLiteDatabase;
 public class FeedTestDbHelper extends SQLiteOpenHelper {
 
     // If you change the database schema, you must increment the database version.
-    public static final int DATABASE_VERSION = 2;
+    public static final int DATABASE_VERSION = 3;
     public static final String DATABASE_NAME = "FeedTest.db";
     private static final String INTEGER_TYPE = " INTEGER";
     private static final String TIMESTAMP_TYPE = " TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
@@ -21,7 +21,9 @@ public class FeedTestDbHelper extends SQLiteOpenHelper {
     private static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + FeedTestContract.FeedEntry.TABLE_NAME + " (" +
             FeedTestContract.FeedEntry._ID + " INTEGER PRIMARY KEY" + COMMA_SEP +
-            FeedTestContract.FeedEntry.COLUMN_NAME_PIN + INTEGER_TYPE + COMMA_SEP +
+            FeedTestContract.FeedEntry.COLUMN_NAME_PIN_LAST + INTEGER_TYPE + COMMA_SEP +
+            FeedTestContract.FeedEntry.COLUMN_NAME_PIN_TOTAL + INTEGER_TYPE + COMMA_SEP +
+            FeedTestContract.FeedEntry.COLUMN_NAME_PIN_TRIES + INTEGER_TYPE + COMMA_SEP +
             FeedTestContract.FeedEntry.COLUMN_NAME_Q1 + INTEGER_TYPE + COMMA_SEP +
             FeedTestContract.FeedEntry.COLUMN_NAME_Q2 + INTEGER_TYPE + COMMA_SEP +
             FeedTestContract.FeedEntry.COLUMN_NAME_Q3 + INTEGER_TYPE + COMMA_SEP +

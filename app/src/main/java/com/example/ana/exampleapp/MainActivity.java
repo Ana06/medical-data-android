@@ -5,15 +5,15 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnFocusChangeListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.widget.Toast;
 
 /**
  * Main activity of the app. It shows a view that creates a {@link RegisterActivity} if it is the
@@ -22,12 +22,14 @@ import android.widget.Toast;
  *
  * @author Ana María Martínez Gómez
  */
-public class MainActivity extends AppCompatActivity implements OnFocusChangeListener{
+public class MainActivity extends AppCompatActivity{
     //settings, mDbHelper, readable_db and projection are used repeatedly
     SharedPreferences settings;
     SQLiteDatabase readable_db;
     String[] projection = {FeedTestContract.FeedEntry.COLUMN_NAME_TIMESTAMP};
+    long startTotalTime = -1;
     long startTime = -1;
+    int pin_tries = 0;
     EditText pinEditText;
 
     @Override
@@ -43,7 +45,9 @@ public class MainActivity extends AppCompatActivity implements OnFocusChangeList
     @Override
     protected void onRestart(){
         super.onRestart();
+        startTotalTime = -1;
         startTime = -1;
+        pin_tries = 0;
         setMainView();
     }
 
@@ -74,7 +78,29 @@ public class MainActivity extends AppCompatActivity implements OnFocusChangeList
             }
 
             pinEditText = (EditText) findViewById(R.id.pin);
-            pinEditText.setOnFocusChangeListener(this);
+            TextWatcher tw = new TextWatcher() {
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    if(startTotalTime == -1 && pinEditText.length() == 1) {
+                        startTotalTime = System.nanoTime(); // current timestamp in nanoseconds
+                        startTime = System.nanoTime(); // current timestamp in nanoseconds
+                    }
+                    else if(startTime == -1 && pinEditText.length() == 1){
+                        startTime = System.nanoTime(); // current timestamp in nanoseconds
+                    }
+                }
+
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    //pinEditText.setError(null);
+                }
+            };
+            pinEditText.addTextChangedListener(tw);
         }
     }
 
@@ -128,15 +154,32 @@ public class MainActivity extends AppCompatActivity implements OnFocusChangeList
     public void btnStart(View view) {
         int pin = settings.getInt("pin", 0);
         String pinText = pinEditText.getText().toString();
+        pin_tries ++;
         if(!pinText.equals("") && pin == Integer.parseInt(pinText)) {
             //The PIN is correct
             long pin_time = (System.nanoTime() - startTime) / 1000000; // in milliseconds
+            long pin_time_total = (System.nanoTime() - startTotalTime) / 1000000; // in milliseconds
             Intent intent = new Intent(this, TestActivity.class);
             intent.putExtra("PIN_TIME", pin_time);
+            intent.putExtra("PIN_TIME_TOTAL", pin_time_total);
+            intent.putExtra("PIN_TRIES", pin_tries);
             startActivity(intent);
         }
-        else
+        else {
+            startTime = -1;
+            pinEditText.setText("");
             pinEditText.setError(getString(R.string.pin_error));
+        }
+    }
+
+    /**
+     * Check if the email is in the database and the password is correct and, in that case,
+     * download the user information from the database and allow him/her to star the daily test.
+     *
+     * @param view  the {@link View} clicked
+     */
+    public void btnSignIn(View view) {
+        //In process
     }
 
     /**
@@ -144,24 +187,8 @@ public class MainActivity extends AppCompatActivity implements OnFocusChangeList
      *
      * @param view  the {@link View} clicked
      */
-    public void btnRegister(View view) {
+    public void btnSignUp(View view) {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
-    }
-
-    /**
-     * Creates a {@link CodeRegisterActivity}.
-     *
-     * @param view  the {@link View} clicked
-     */
-    public void btnRegisterWithCode(View view) {
-        Intent intent = new Intent(this, CodeRegisterActivity.class);
-        startActivity(intent);
-    }
-
-    @Override
-    public void onFocusChange(View v, boolean hasFocus) {
-        if(hasFocus && startTime == -1)
-            startTime = System.nanoTime(); // current timestamp in nanoseconds
     }
 }

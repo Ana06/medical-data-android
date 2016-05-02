@@ -186,16 +186,15 @@
 
             <!-- finish button -->
             <Button
+                android:id="@+id/button_finish"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/register"
-                android:id="@+id/button_finish"
                 android:onClick="btnFinish"
                 android:layout_marginTop="40dp"
                 android:layout_marginBottom="40dp"
                 android:layout_below="@+id/terms_conditions"
                 android:layout_centerHorizontal="true" />
-
 
         </RelativeLayout>
     </ScrollView>

@@ -26,7 +26,7 @@ import android.text.style.ClickableSpan;
 
 /**
  * This activity allows a user to register in the app by asking his name, email, age, gender and a
- * 4 numbers PIN.
+ * 6 numbers PIN.
  *
  * @author Ana María Martínez Gómez
  */
@@ -103,7 +103,7 @@ public class RegisterActivity extends AppCompatActivity {
         EditText pin = (EditText) findViewById(R.id.pin_answer);
         EditText pin2 = (EditText) findViewById(R.id.pin2_answer);
         String pin_text = pin.getText().toString();
-        if (pin_text.length() != 4) {
+        if (pin_text.length() != 6) {
             pin.setError(getString(R.string.pin_format));
             if(!error) {
                 focusFirstError(pin, R.id.pin);

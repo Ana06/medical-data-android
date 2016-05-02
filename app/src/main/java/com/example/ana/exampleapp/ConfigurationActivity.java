@@ -15,8 +15,7 @@ public class ConfigurationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent = getIntent();
-        setContentView(R.layout.not_ready_activity);
+        setContentView(R.layout.configuration_activity);
     }
 
 }

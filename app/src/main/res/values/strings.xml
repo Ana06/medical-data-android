@@ -13,8 +13,8 @@
     <string name="pin_error">Incorrect pin</string>
 
     <!-- activity_main_first_time -->
-    <string name="with_code">I HAVE CODE</string>
-    <string name="without_code">I DON\'T HAVE CODE</string>
+    <string name="sign_in">SIGN IN</string>
+    <string name="sign_up">Sign up</string>
 
     <!-- register_with_code_activity -->
     <string name="insert_code">INTRODUCE THE CODE GIVEN BY YOUR DOCTOR</string>
@@ -27,7 +27,7 @@
     <string name="gender">GENDER</string>
     <string name="female">FEMALE</string>
     <string name="male">MALE</string>
-    <string name="pin">PIN</string>
+    <string name="pin">PIN (6 digits)</string>
     <string name="pin2">REPEAT THE PIN</string>
     <string name="terms1">I have read and agree to the</string>
     <string name="terms2">terms and conditions</string>
@@ -39,7 +39,7 @@
     <string name="email_format">The email field is not correct.</string>
     <string name="age_blank">The age field can\'t be blank.</string>
     <string name="gender_blank">You have to choose your gender</string>
-    <string name="pin_format">The PIN field can\'t be blank and must have 4 digits.</string>
+    <string name="pin_format">The PIN field can\'t be blank and must have 6 digits.</string>
     <string name="pin2_format">The PIN isn\'t correct.</string>
     <string name="terms_blank">You must agree to the terms and conditions</string>
 
@@ -96,4 +96,9 @@
     <string name="incorrect_pin">The pin is incorrect</string>
     <string name="save_changes">SAVE CHANGES</string>
     <string name="changes_saved">Changes have been saved</string>
+
+    <!-- configuration_activity -->
+    <string name="configuration_title">CONFIGURATION</string>
+    <string name="configuration_location">Permitir recoger datos sobre la ubicación.</string>
+
 </resources>

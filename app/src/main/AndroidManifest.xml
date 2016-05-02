@@ -16,8 +16,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CodeRegisterActivity" >
-        </activity>
         <activity android:name=".RegisterActivity">
         </activity>
         <activity android:name=".FinishRegisterActivity" >
