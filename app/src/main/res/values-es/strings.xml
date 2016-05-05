@@ -1,6 +1,4 @@
 <resources>
-    <string name="app_name">ExampleApp</string>
-
     <!-- menu -->
     <string name="profile">Perfil</string>
     <string name="configuration">Ajustes</string>

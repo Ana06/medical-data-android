@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ExampleApp</string>
+    <string name="app_name">Bip4cast</string>
 
     <!-- menu -->
     <string name="profile">Profile</string>
