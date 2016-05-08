@@ -14,14 +14,10 @@
     <string name="sign_in">ENTRAR</string>
     <string name="sign_up">Registrarse</string>
 
-    <!-- register_with_code_activity -->
-    <string name="insert_code">INTRODUCE EL CÓDIGO PROPORCIONADO POR TU MÉDICO</string>
-    <string name="next">SIGUIENTE</string>
-
     <!-- register -->
     <string name="name">NOMBRE</string>
     <string name="email">EMAIL</string>
-    <string name="age">EDAD</string>
+    <string name="age">FECHA DE NACIMIENTO</string>
     <string name="gender">SEXO</string>
     <string name="female">MUJER</string>
     <string name="male">HOMBRE</string>
@@ -30,6 +26,11 @@
     <string name="terms1">He leido y acepto los</string>
     <string name="terms2">términos y condiciones legales</string>
     <string name="register">REGISTRARSE</string>
+    <string name="register_error">El registro no se ha podido realizar. Intentalo más tarde.</string>
+    <string name="repeated_email">Ya hay un usuario con ese email. El registro no se ha podido realizar.</string>
+    <string name="repeated_email2">Existe un usuario con el mismo email.</string>
+    <string name="wrong_data">Email o pin incorrecto.</string>
+    <string name="update_error">No se han podido guardar los cambios. Comprueba que tienes conexión a internet y inténtalo de nuevo.</string>
 
     <!-- register errors -->
     <string name="name_blank">El nombre es obligatorio. Puedes usar un nickname si no quieres proporcionar tu nombre real.</string>
@@ -38,6 +39,7 @@
     <string name="age_blank">La edad es obligatoria.</string>
     <string name="gender_blank">Debes seleccionar tu sexo.</string>
     <string name="pin_format">El PIN es obligatorio y debe tener 6 dígitos.</string>
+    <string name="pin_blank">El PIN es obligatorio.</string>
     <string name="pin2_format">El PIN no coincide.</string>
     <string name="terms_blank">Debes aceptar los terminos y condiciones.</string>
 
@@ -57,12 +59,13 @@
     <string name="question5">Irritabilidad</string>
     <string name="question6">Calidad del sueño</string>
     <string name="question7">Menstruación</string>
-    <string name="question8">Alcohol</string>
-    <string name="question9">Cigarrillos</string>
-    <string name="question10">Otras drogas</string>
-    <string name="question11">Hora de acostarse</string>
-    <string name="question12">Hora de dormirse</string>
-    <string name="question13">Hora de despertarse</string>
+    <string name="question8">Cafeina</string>
+    <string name="question9">Alcohol</string>
+    <string name="question10">Cigarrillos</string>
+    <string name="question11">Otras drogas</string>
+    <string name="question12">Hora de acostarse</string>
+    <string name="question13">Hora de dormirse</string>
+    <string name="question14">Hora de despertarse</string>
 
     <string name="send">ENVIAR</string>
 
@@ -76,12 +79,13 @@
     <string name="help5">Help Irritabilidad</string>
     <string name="help6">Help Calidad del sueño</string>
     <string name="help7">Help Menstruación</string>
-    <string name="help8">Help Alcohol</string>
-    <string name="help9">Help Cigarrillos</string>
-    <string name="help10">Help Otras drogas</string>
-    <string name="help11">Help Hora de acostarse</string>
-    <string name="help12">Help Hora de dormirse</string>
-    <string name="help13">Help Hora de despertarse</string>
+    <string name="help8">Help Cafeina</string>
+    <string name="help9">Help Alcohol</string>
+    <string name="help10">Help Cigarrillos</string>
+    <string name="help11">Help Otras drogas</string>
+    <string name="help12">Help Hora de acostarse</string>
+    <string name="help13">Help Hora de dormirse</string>
+    <string name="help14">Help Hora de despertarse</string>
 
     <string name="terms_text">Bla bla bla df dsf sdf dsf dsf kdlfjsdo dskjfd fdsjkf dskf jdslk jflkds jflks fjk sjflks jfklsjd klfjdlks jfkldsfj dlksfj lksdfj kldsfj dkslfj sdklfj dsklf jkldfj dsklfsdiokf jsdifdsiof jsdiofsdiof jdskjdslk jfkldsjfk kl djkfdjklfsflkgjpasg jdfi ijjgiksjdgkfdjgkdf   jklfdj gklf gjf  fdjkf jkvdfbjfi fdjk jkhjfkjd llkf dlf jdslf jdklf jdslkf jdk fjdklsjf lkdsfj lkdsjfkldj fdklsfjdklsf jkdlfj dklfj dklf jdskl jdkslfj lkdf jdklf jdklfj dklsfj dklsfj dlkfsj dklsfjdlks fjdklfjdlkfj dlksfjlkdsj flkdfj kldsfj kldfj lk df df dsf sdf dsf dsf kdlfjsdo dskjfd fdsjkf dskf jdslk jflkds jflks fjk sjflks jfklsjd klfjdlks jfkldsfj dlksfj lksdfj kldsfj dkslfj sdklfj dsklf jkldfj dsklfsdiokf jsdifdsiof jsdiofsdiof jdskjdslk jfkldsjfk kl djkfdjklfsflkgjpasg jdfi ijjgiksjdgkfdjgkdf   jklfdj gklf gjf  fdjkf jkvdfbjfi fdjk jkhjfkjd llkf dlf jdslf jdklf jdslkf jdk fjdklsjf lkdsfj lkdsjfkldj fdklsfjdklsf jkdlfj dklfj dklf jdskl jdkslfj lkdf jdklf jdklfj dklsfj dklsfj dlkfsj dklsfjdlks fjdklfjdlkfj dlksfjlkdsj flkdfj kldsfj kldfj lk</string>
 
@@ -99,4 +103,8 @@
     <string name="configuration_title">AJUSTES</string>
     <string name="configuration_location">Permitir recoger datos sobre la ubicación.</string>
 
+    <!-- information_activity -->
+    <string name="version">VERSIÓN 2.1</string>
+    <string name="developed_by">Desarrollada por Ana María Martínez Gómez</string>
+    <string name="see_terms">Ver términos y condiciones legales</string>
 </resources>

@@ -4,20 +4,27 @@ import android.app.Activity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+
 /**
  * Class with static final variables and methods used in the program.
  *
  * @author Ana María Martínez Gómez
  */
 public final class Variables {
+    // Name of shared preferences file;
     public static final String PREFS_NAME = "MyPrefsFile";
+    // Regular expression to check email correction
     public static final String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+    // MongoDB uri with the IP, authentication (user, password and mechanism), database, etc.
+    public static final String mongo_uri =
+            "mongodb://androidUser:1234@192.168.1.53:27017/bipolarDatabase?authMechanism=MONGODB-CR&connectTimeoutMS=2000";
 
     /**
-     *  Final class: to prevent someone from accidentally instantiating the class, we give it an
-     *  empty constructor.
+     * Final class: to prevent someone from accidentally instantiating the class, we give it an
+     * empty constructor.
      */
-    public Variables() {}
+    public Variables() {
+    }
 
     /**
      * Hide the keyboard and clear focus

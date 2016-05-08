@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.widget.TextView;
 
+
 /**
  * It set a help view with a given question and help.
  *

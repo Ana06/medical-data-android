@@ -6,12 +6,13 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.view.View;
 
+
 /**
  * Activity creates when the register has been finished.
  *
  * @author Ana María Martínez Gómez
  */
-public class FinishRegisterActivity extends AppCompatActivity{
+public class FinishRegisterActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +29,7 @@ public class FinishRegisterActivity extends AppCompatActivity{
     /**
      * It finishes the activity.
      *
-     * @param view  the {@link View} clicked
+     * @param view the {@link View} clicked
      * @see #finish()
      */
     public void btnStart(View view) {

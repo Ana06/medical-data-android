@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteDatabase;
 
+
 /**
  * SQL Lite Helper for the test database.
  *
@@ -13,7 +14,8 @@ import android.database.sqlite.SQLiteDatabase;
 public class FeedTestDbHelper extends SQLiteOpenHelper {
 
     // If you change the database schema, you must increment the database version.
-    public static final int DATABASE_VERSION = 3;
+
+    public static final int DATABASE_VERSION = 4;
     public static final String DATABASE_NAME = "FeedTest.db";
     private static final String INTEGER_TYPE = " INTEGER";
     private static final String TIMESTAMP_TYPE = " TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
@@ -37,6 +39,7 @@ public class FeedTestDbHelper extends SQLiteOpenHelper {
             FeedTestContract.FeedEntry.COLUMN_NAME_Q11 + INTEGER_TYPE + COMMA_SEP +
             FeedTestContract.FeedEntry.COLUMN_NAME_Q12 + INTEGER_TYPE + COMMA_SEP +
             FeedTestContract.FeedEntry.COLUMN_NAME_Q13 + INTEGER_TYPE + COMMA_SEP +
+            FeedTestContract.FeedEntry.COLUMN_NAME_Q14 + INTEGER_TYPE + COMMA_SEP +
             FeedTestContract.FeedEntry.COLUMN_NAME_TIMESTAMP + TIMESTAMP_TYPE +
             " )";
     private static final String SQL_DELETE_ENTRIES =

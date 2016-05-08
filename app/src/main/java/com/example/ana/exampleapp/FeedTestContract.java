@@ -6,6 +6,7 @@ import java.util.TimeZone;
 
 import android.provider.BaseColumns;
 
+
 /**
  * Contract class with information to create the test database and manage it.
  *
@@ -71,12 +72,13 @@ public final class FeedTestContract {
         public static final String COLUMN_NAME_Q5 = "irritability"; // Values: 1,2,3,4,5
         public static final String COLUMN_NAME_Q6 = "fatigue"; // Values: 1,2,3,4,5
         public static final String COLUMN_NAME_Q7 = "menstrualPeriod"; // Values: 0(no), 1(yes)
-        public static final String COLUMN_NAME_Q8 = "alcohol"; // Integer
-        public static final String COLUMN_NAME_Q9 = "tobacco"; // Integer
-        public static final String COLUMN_NAME_Q10 = "drugs"; // Values: 0(no), 1(yes)
-        public static final String COLUMN_NAME_Q11 = "timeBed"; // Integer (minutes)
-        public static final String COLUMN_NAME_Q12 = "timeSleep"; // Integer (minutes)
-        public static final String COLUMN_NAME_Q13 = "timeWakeUp"; // Integer (minutes)
+        public static final String COLUMN_NAME_Q8 = "caffeine"; // Integer
+        public static final String COLUMN_NAME_Q9 = "alcohol"; // Integer
+        public static final String COLUMN_NAME_Q10 = "tobacco"; // Integer
+        public static final String COLUMN_NAME_Q11 = "drugs"; // Values: 0(no), 1(yes)
+        public static final String COLUMN_NAME_Q12 = "timeBed"; // Integer (minutes)
+        public static final String COLUMN_NAME_Q13 = "timeSleep"; // Integer (minutes)
+        public static final String COLUMN_NAME_Q14 = "timeWakeUp"; // Integer (minutes)
         public static final String COLUMN_NAME_TIMESTAMP = "timestamp"; // Timestamp
     }
 
@@ -95,6 +97,7 @@ public final class FeedTestContract {
                     FeedEntry.COLUMN_NAME_Q10,
                     FeedEntry.COLUMN_NAME_Q11,
                     FeedEntry.COLUMN_NAME_Q12,
+                    FeedEntry.COLUMN_NAME_Q13,
                     FeedEntry.COLUMN_NAME_Q13
             };
 }

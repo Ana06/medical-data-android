@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
+
 /**
  * Custom view for a rating bar made of 7 surrounded {@link TextView}s. They can be selected or not
  * and there is a special one whose border is pink. The possible answer values are: -3, -2, -1, 0,
@@ -13,7 +14,7 @@ import android.widget.TextView;
  *
  * @author Ana María Martínez Gómez
  */
-public class RatingStars7 extends RatingStars{
+public class RatingStars7 extends RatingStars {
 
     /**
      * Class constructor.
@@ -34,11 +35,11 @@ public class RatingStars7 extends RatingStars{
     /**
      * Inflate rating_stars_7.xml and add click listener to its 7 {@link TextView}s.
      *
-     * @param context   Its context
+     * @param context Its context
      * @see LayoutInflater
      * @see View#setOnClickListener(OnClickListener)
      */
-    private void init(Context context){
+    private void init(Context context) {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.rating_stars_7, this, true);
@@ -57,12 +58,12 @@ public class RatingStars7 extends RatingStars{
      * Set the special {@link TextView} whose border is wanted to be pink. {@link #updateColor()}
      * needs to be called to see the color changes.
      *
-     * @param pink_answer   The value of the special {@link TextView} whose border is wanted to be
-     *                      pink. The possible values are: 1, 2, 3, 4, 5, 6 and 7. If the value is
-     *                      not a possible one this function has no effect.
+     * @param pink_answer The value of the special {@link TextView} whose border is wanted to be
+     *                    pink. The possible values are: 1, 2, 3, 4, 5, 6 and 7. If the value is
+     *                    not a possible one this function has no effect.
      * @see #updateColor()
      */
-    public void setPink(int pink_answer){
+    public void setPink(int pink_answer) {
         switch (pink_answer) {
             case -3:
                 pink = R.id.star1;
@@ -91,21 +92,21 @@ public class RatingStars7 extends RatingStars{
     /**
      * Set the answer value. {@link #updateColor()} needs to be called to see the color changes.
      *
-     * @param answer    The value of the answer. The possible values are: 1, 2, 3, 4, 5, 6 and 7. If
-     *                  the value is not a possible one this function only change the answer value
-     *                  but not the way it is colored.
+     * @param answer The value of the answer. The possible values are: 1, 2, 3, 4, 5, 6 and 7. If
+     *               the value is not a possible one this function only change the answer value
+     *               but not the way it is colored.
      * @see #updateColor()
      */
-    public void setAnswer(int answer){
+    public void setAnswer(int answer) {
         this.answer = answer;
-        switch(answer) {
+        switch (answer) {
             case -3:
                 color_numbers = new int[]{R.id.star1, R.id.star2, R.id.star3, R.id.star4};
                 non_color_numbers = new int[]{R.id.star5, R.id.star6, R.id.star7};
                 break;
             case -2:
                 color_numbers = new int[]{R.id.star2, R.id.star3, R.id.star4};
-                non_color_numbers = new int[]{R.id.star1,R.id.star5, R.id.star6, R.id.star7};
+                non_color_numbers = new int[]{R.id.star1, R.id.star5, R.id.star6, R.id.star7};
                 break;
             case -1:
                 color_numbers = new int[]{R.id.star3, R.id.star4};
@@ -133,11 +134,11 @@ public class RatingStars7 extends RatingStars{
     /**
      * Change the answer value and color the rating bar appropriately.
      *
-     * @param view  the clicked {@link View}. Expected to be star1, star2, star3, star4, star5,
-     *              star6 or star7.
+     * @param view the clicked {@link View}. Expected to be star1, star2, star3, star4, star5,
+     *             star6 or star7.
      */
     public void onClick(View view) {
-        switch(view.getId()) {
+        switch (view.getId()) {
             case R.id.star1:
                 answer = -3;
                 color_numbers = new int[]{R.id.star1, R.id.star2, R.id.star3, R.id.star4};
@@ -146,7 +147,7 @@ public class RatingStars7 extends RatingStars{
             case R.id.star2:
                 answer = -2;
                 color_numbers = new int[]{R.id.star2, R.id.star3, R.id.star4};
-                non_color_numbers = new int[]{R.id.star1,R.id.star5, R.id.star6, R.id.star7};
+                non_color_numbers = new int[]{R.id.star1, R.id.star5, R.id.star6, R.id.star7};
                 break;
             case R.id.star3:
                 answer = -1;

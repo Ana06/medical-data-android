@@ -24,12 +24,15 @@
         </activity>
         <activity android:name=".HelpActivity" >
         </activity>
-        <activity android:name=".ProfileActivity" >
+        <activity android:name=".ProfileActivity"
+            android:windowSoftInputMode="stateHidden">
         </activity>
         <activity android:name=".ConfigurationActivity" >
         </activity>
         <activity android:name=".InformationActivity" >
         </activity>
     </application>
+    <uses-permission
+        android:name="android.permission.INTERNET" />
 
 </manifest>

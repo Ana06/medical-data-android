@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.ContentValues;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.EditText;
@@ -19,7 +18,6 @@ import android.graphics.Rect;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import org.w3c.dom.Text;
 
 /**
  * Class that manages the diary text, whose recollection is the main aim of the app.
@@ -32,7 +30,7 @@ public class TestActivity extends AppCompatActivity {
                  menstruation)
     text field: no_value = -1
     time fields: in minutes, non_value = -1 */
-    private int[] questions = new int[]{10, 10, 10, 10, 10, 10, 0, -1, -1, -1, -1, -1, -1};
+    private int[] questions = new int[]{10, 10, 10, 10, 10, 10, 0, -1, -1, -1, -1, -1, -1, -1};
     long pin_time;
     long pin_time_total;
     int pin_tries;
@@ -53,7 +51,8 @@ public class TestActivity extends AppCompatActivity {
             FeedTestContract.FeedEntry.COLUMN_NAME_Q10,
             FeedTestContract.FeedEntry.COLUMN_NAME_Q11,
             FeedTestContract.FeedEntry.COLUMN_NAME_Q12,
-            FeedTestContract.FeedEntry.COLUMN_NAME_Q13
+            FeedTestContract.FeedEntry.COLUMN_NAME_Q13,
+            FeedTestContract.FeedEntry.COLUMN_NAME_Q14
     };
 
     @Override
@@ -66,12 +65,12 @@ public class TestActivity extends AppCompatActivity {
         pin_tries = intent.getIntExtra("PIN_TRIES", 0);
         setContentView(R.layout.test_activity);
 
-        TimePicker tp11 = (TimePicker) findViewById(R.id.question11_rating);
         TimePicker tp12 = (TimePicker) findViewById(R.id.question12_rating);
         TimePicker tp13 = (TimePicker) findViewById(R.id.question13_rating);
-        tp11.setIs24HourView(true);
+        TimePicker tp14 = (TimePicker) findViewById(R.id.question14_rating);
         tp12.setIs24HourView(true);
         tp13.setIs24HourView(true);
+        tp14.setIs24HourView(true);
 
         SharedPreferences settings = getSharedPreferences(Variables.PREFS_NAME, Context.MODE_PRIVATE);
         isFemale = settings.getBoolean("gender", true);
@@ -113,27 +112,29 @@ public class TestActivity extends AppCompatActivity {
 
                 EditText r8 = (EditText) findViewById(R.id.question8_rating);
                 EditText r9 = (EditText) findViewById(R.id.question9_rating);
+                EditText r10 = (EditText) findViewById(R.id.question10_rating);
                 r8.setText(String.valueOf(c.getInt(8)));
                 r9.setText(String.valueOf(c.getInt(9)));
+                r10.setText(String.valueOf(c.getInt(10)));
 
-                RadioGroup r10 = (RadioGroup) findViewById(R.id.question10_rating);
-                ((RadioButton) r10.getChildAt(c.getInt(10))).setChecked(true);
+                RadioGroup r11 = (RadioGroup) findViewById(R.id.question11_rating);
+                ((RadioButton) r11.getChildAt(c.getInt(11))).setChecked(true);
 
                 //Taking into account deprecated methods
                 if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
-                    tp11.setHour(c.getInt(11) / 60);
-                    tp11.setMinute(c.getInt(11) % 60);
-                    tp12.setHour(c.getInt(12) / 60);
-                    tp12.setMinute(c.getInt(12) % 60);
-                    tp13.setHour(c.getInt(13) / 60);
-                    tp13.setMinute(c.getInt(13) % 60);
+                    tp12.setHour(c.getInt(11) / 60);
+                    tp12.setMinute(c.getInt(11) % 60);
+                    tp13.setHour(c.getInt(12) / 60);
+                    tp13.setMinute(c.getInt(12) % 60);
+                    tp14.setHour(c.getInt(13) / 60);
+                    tp14.setMinute(c.getInt(13) % 60);
                 } else {
-                    tp11.setCurrentHour(c.getInt(11) / 60);
-                    tp11.setCurrentMinute(c.getInt(11) % 60);
-                    tp12.setCurrentHour(c.getInt(12) / 60);
-                    tp12.setCurrentMinute(c.getInt(12) % 60);
-                    tp13.setCurrentHour(c.getInt(13) / 60);
-                    tp13.setCurrentMinute(c.getInt(13) % 60);
+                    tp12.setCurrentHour(c.getInt(11) / 60);
+                    tp12.setCurrentMinute(c.getInt(11) % 60);
+                    tp13.setCurrentHour(c.getInt(12) / 60);
+                    tp13.setCurrentMinute(c.getInt(12) % 60);
+                    tp14.setCurrentHour(c.getInt(13) / 60);
+                    tp14.setCurrentMinute(c.getInt(13) % 60);
                 }
 
                 has_test = c.moveToNext(); //has_test = false if it only has one row
@@ -216,6 +217,10 @@ public class TestActivity extends AppCompatActivity {
                 question = getString(R.string.question13);
                 help = getString(R.string.help13);
                 break;
+            case R.id.question14_help:
+                question = getString(R.string.question13);
+                help = getString(R.string.help13);
+                break;
         }
         Intent intent = new Intent(this, HelpActivity.class);
         intent.putExtra("HELP", help);
@@ -262,66 +267,43 @@ public class TestActivity extends AppCompatActivity {
             }
         }
 
-        boolean keyboard_needed = false;
         // Check question 8 (EditText)
-        EditText field = (EditText) findViewById(R.id.question8_rating);
-        String value = field.getText().toString();
-        tv = (TextView) findViewById(R.id.question8);
-        if (value.equals("")) {
-            tv.setError("");
-            if (error == null) {
-                field.requestFocus();
-                keyboard_needed = true;
-                error = tv;
-            }
-        } else {
-            questions[7] = Integer.parseInt(value);
-            tv.setError(null);
-        }
+        error = EditTextAnswered(7, R.id.question8_rating, R.id.question8, error);
 
         // Check question 9 (EditText)
-        field = (EditText) findViewById(R.id.question9_rating);
-        value = field.getText().toString();
-        tv = (TextView) findViewById(R.id.question9);
-        if (value.equals("")) {
-            tv.setError("");
-            if (error == null) {
-                field.requestFocus();
-                keyboard_needed = true;
-                error = tv;
-            }
-        } else {
-            questions[8] = Byte.parseByte(value);
-            tv.setError(null);
-        }
+        error = EditTextAnswered(8, R.id.question9_rating, R.id.question9, error);
 
-        // Check question 10 (RadioGroup)
-        RadioGroup radioGroup = (RadioGroup) findViewById(R.id.question10_rating);
+        // Check question 10 (EditText)
+        error = EditTextAnswered(9, R.id.question10_rating, R.id.question10, error);
+
+
+        // Check question 11 (RadioGroup)
+        RadioGroup radioGroup = (RadioGroup) findViewById(R.id.question11_rating);
         int id = radioGroup.getCheckedRadioButtonId();
-        tv = (TextView) findViewById(R.id.question10);
+        tv = (TextView) findViewById(R.id.question11);
         if (id == -1) {
             tv.setError("");
             if (error == null) error = tv;
         } else {
             tv.setError(null);
-            if (id == R.id.question10_rating_no) questions[9] = 0;
-            else questions[9] = 1;
+            if (id == R.id.question11_rating_no) questions[10] = 0;
+            else questions[10] = 1;
         }
 
         if (error == null) {
             // Get times from TimePickers in minutes.
-            TimePicker tp11 = (TimePicker) findViewById(R.id.question11_rating);
             TimePicker tp12 = (TimePicker) findViewById(R.id.question12_rating);
             TimePicker tp13 = (TimePicker) findViewById(R.id.question13_rating);
+            TimePicker tp14 = (TimePicker) findViewById(R.id.question14_rating);
             // Taking into account deprecated methods
             if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
-                questions[10] = tp11.getHour() * 60 + tp11.getMinute();
                 questions[11] = tp12.getHour() * 60 + tp12.getMinute();
                 questions[12] = tp13.getHour() * 60 + tp13.getMinute();
+                questions[13] = tp14.getHour() * 60 + tp14.getMinute();
             } else {
-                questions[10] = tp11.getCurrentHour() * 60 + tp11.getCurrentMinute();
                 questions[11] = tp12.getCurrentHour() * 60 + tp12.getCurrentMinute();
                 questions[12] = tp13.getCurrentHour() * 60 + tp13.getCurrentMinute();
+                questions[13] = tp14.getCurrentHour() * 60 + tp14.getCurrentMinute();
             }
 
             // Save the test in the database
@@ -362,7 +344,7 @@ public class TestActivity extends AppCompatActivity {
      * @param i      Number of question
      * @param rating {@link RatingStars} id
      * @param text   {@link TextView} id of the question title
-     * @param error  {@link TextView} if of the first question title whose question has an error
+     * @param error  {@link TextView} title of the first question title whose question has an error
      * @return <code>true</code> if an error was set; <code>false</code> otherwise.
      */
     private TextView RatingStarsAnswered(int i, int rating, int text, TextView error) {
@@ -379,12 +361,40 @@ public class TestActivity extends AppCompatActivity {
     }
 
     /**
+     * Auxiliar function to get questions 8 to 10 value and set an error if they have not been
+     * answered.
+     *
+     * @param i      Number of question
+     * @param rating {@link RatingStars} id
+     * @param text   {@link TextView} id of the question title
+     * @param error  {@link TextView} title of the first question title whose question has an error
+     * @return <code>true</code> if an error was set; <code>false</code> otherwise.
+     */
+    private TextView EditTextAnswered(int i, int rating, int text, TextView error) {
+        EditText field = (EditText) findViewById(rating);
+        String value = field.getText().toString();
+        TextView tv = (TextView) findViewById(text);
+        if (value.equals("")) {
+            tv.setError("");
+            if (error == null) {
+                field.requestFocus();
+                return tv;
+            }
+        } else {
+            questions[i] = Integer.parseInt(value);
+            tv.setError(null);
+        }
+        return error;
+    }
+
+    /**
      * It finishes the activity.
      *
-     * @param view  the {@link View} clicked
+     * @param view the {@link View} clicked
      * @see #finish()
      */
     public void btnChange(View view) {
         finish();
     }
+
 }

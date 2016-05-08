@@ -1,6 +1,10 @@
 package com.example.ana.exampleapp;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import android.support.v7.app.AppCompatActivity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.content.Intent;
 import android.content.Context;
@@ -14,15 +18,26 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.Toast;
+
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+
+import org.bson.Document;
+
+import static com.mongodb.client.model.Filters.eq;
+
 
 /**
  * Main activity of the app. It shows a view that creates a {@link RegisterActivity} if it is the
  * first that the app is used. Otherwise a view to introduce the PIN is shown and a
- * {@link TestActivity} is created when the corrected PIN is provided.
+ * {@link TestActivity} is created when the correct PIN is provided.
  *
  * @author Ana María Martínez Gómez
  */
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
     //settings, mDbHelper, readable_db and projection are used repeatedly
     SharedPreferences settings;
     SQLiteDatabase readable_db;
@@ -43,7 +58,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     @Override
-    protected void onRestart(){
+    protected void onRestart() {
         super.onRestart();
         startTotalTime = -1;
         startTime = -1;
@@ -55,12 +70,11 @@ public class MainActivity extends AppCompatActivity{
      * Set the appropriate view taking into account if it is the first time that app is used and
      * the database last entry.
      */
-    private void setMainView(){
+    private void setMainView() {
         boolean firstTime = settings.getBoolean("firstTime", true);
-        if(firstTime) {
+        if (firstTime) {
             setContentView(R.layout.activity_main_first_time);
-        }
-        else {
+        } else {
             setContentView(R.layout.activity_main);
 
             Cursor c = readable_db.query(
@@ -71,7 +85,7 @@ public class MainActivity extends AppCompatActivity{
                     null,
                     FeedTestContract.FeedEntry._ID + " DESC", "1");
             boolean moved = c.moveToFirst(); //false if it is empty
-            if(moved && FeedTestContract.isToday(c.getString(0))){
+            if (moved && FeedTestContract.isToday(c.getString(0))) {
                 // Test has already been filled
                 Button button = (Button) findViewById(R.id.button_start);
                 button.setText(getString(R.string.start_change));
@@ -82,11 +96,10 @@ public class MainActivity extends AppCompatActivity{
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    if(startTotalTime == -1 && pinEditText.length() == 1) {
+                    if (startTotalTime == -1 && pinEditText.length() == 1) {
                         startTotalTime = System.nanoTime(); // current timestamp in nanoseconds
                         startTime = System.nanoTime(); // current timestamp in nanoseconds
-                    }
-                    else if(startTime == -1 && pinEditText.length() == 1){
+                    } else if (startTime == -1 && pinEditText.length() == 1) {
                         startTime = System.nanoTime(); // current timestamp in nanoseconds
                     }
                 }
@@ -149,13 +162,13 @@ public class MainActivity extends AppCompatActivity{
      * Check if the introduced PIN is correct and in that case saves the time spent to do it and
      * creates a {@link TestActivity}. Otherwise it set an error on the PIN {@link EditText}.
      *
-     * @param view  the {@link View} that calls the method
+     * @param view the {@link View} that calls the method
      */
     public void btnStart(View view) {
         int pin = settings.getInt("pin", 0);
         String pinText = pinEditText.getText().toString();
-        pin_tries ++;
-        if(!pinText.equals("") && pin == Integer.parseInt(pinText)) {
+        pin_tries++;
+        if (!pinText.equals("") && pin == Integer.parseInt(pinText)) {
             //The PIN is correct
             long pin_time = (System.nanoTime() - startTime) / 1000000; // in milliseconds
             long pin_time_total = (System.nanoTime() - startTotalTime) / 1000000; // in milliseconds
@@ -164,8 +177,7 @@ public class MainActivity extends AppCompatActivity{
             intent.putExtra("PIN_TIME_TOTAL", pin_time_total);
             intent.putExtra("PIN_TRIES", pin_tries);
             startActivity(intent);
-        }
-        else {
+        } else {
             startTime = -1;
             pinEditText.setText("");
             pinEditText.setError(getString(R.string.pin_error));
@@ -174,21 +186,94 @@ public class MainActivity extends AppCompatActivity{
 
     /**
      * Check if the email is in the database and the password is correct and, in that case,
-     * download the user information from the database and allow him/her to star the daily test.
+     * download the user information from the database and creates a {@link FinishRegisterActivity}
+     * to confirm that the sign up process has been completed successfully. If the data introduced
+     * is not correct or there is any problem while connecting with the database the user is
+     * informed using a {@link Toast} message.
      *
-     * @param view  the {@link View} clicked
+     * @param view the {@link View} clicked
      */
     public void btnSignIn(View view) {
-        //In process
+        boolean error = false;
+        EditText email = (EditText) findViewById(R.id.email_answer);
+        String email_text = email.getText().toString();
+        if (email_text.equals("")) {
+            email.setError(getString(R.string.email_blank));
+            email.requestFocus();
+            error = true;
+        }
+        EditText pin = (EditText) findViewById(R.id.pin_answer);
+        String pin_text = pin.getText().toString();
+        if (pin_text.equals("")) {
+            pin.setError(getString(R.string.pin_blank));
+            if (!error) pin.requestFocus();
+            error = true;
+        }
+        if (!error) {
+            int pin_number = Integer.parseInt(pin.getText().toString());
+            User user = new User(email_text, pin_number);
+
+            //Save register in the server database
+            try {
+                DownloadRegistration runner = new DownloadRegistration();
+                runner.execute(user);
+                int option = runner.get();
+                if (option == 0) {
+                    //Save register in the app
+                    user.save(this);
+                    // Feedback: register has been completed
+                    Intent intent = new Intent(this, FinishRegisterActivity.class);
+                    startActivity(intent);
+                } else if (option == 1) {
+                    Toast.makeText(this, R.string.wrong_data, Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(this, R.string.register_error, Toast.LENGTH_LONG).show();
+                }
+            } catch (Exception e) {
+                Toast.makeText(this, R.string.register_error, Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
     /**
      * Creates a {@link RegisterActivity}
      *
-     * @param view  the {@link View} clicked
+     * @param view the {@link View} clicked
      */
     public void btnSignUp(View view) {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
+    }
+
+    /**
+     * This class is used to check that a user exits in the MongoDB database and download his
+     * information from database after signing in.
+     *
+     * @author Ana María Martínez Gómez
+     */
+    private class DownloadRegistration extends AsyncTask<User, Void, Integer> {
+        @Override
+        protected Integer doInBackground(User... params) {
+            try {
+                MongoClientURI mongoClientURI = new MongoClientURI(Variables.mongo_uri);
+                MongoClient mongoClient = new MongoClient(mongoClientURI);
+                MongoDatabase dbMongo = mongoClient.getDatabase(mongoClientURI.getDatabase());
+                MongoCollection<Document> coll = dbMongo.getCollection("users");
+                User local_user = params[0];
+                Document user = coll.find(eq("email", local_user.getEmail())).first();
+                mongoClient.close();
+                if (user == null || !(user.get("pin").equals(local_user.getPin()))) {
+                    return 1; // Wrong data
+                }
+                Date d = (Date) user.get("birthDate");
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(d);
+                // WARNING: Calendar.MONTH starts in 0 Calendar.DAY_OF_MONTH starts in 1
+                local_user.completeSignIn((String) user.get("name"), cal.get(Calendar.DAY_OF_MONTH) - 1, cal.get(Calendar.MONTH), cal.get(Calendar.YEAR), (Boolean) user.get("gender"), user.getObjectId("_id").toString());
+                return 0; //Successfully saved
+            } catch (Exception e) {
+                return 2; // Error
+            }
+        }
     }
 }

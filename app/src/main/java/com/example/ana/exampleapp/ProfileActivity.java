@@ -4,21 +4,31 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Rect;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.SpannableString;
-import android.text.Spanned;
 import android.text.TextPaint;
-import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+
+import org.bson.Document;
+import org.bson.types.ObjectId;
+
+import static com.mongodb.client.model.Filters.eq;
+
 
 /**
  * This activity allows a user to register in the app by asking his name, email, age, gender and a
@@ -27,10 +37,7 @@ import android.widget.Toast;
  * @author Ana María Martínez Gómez
  */
 public class ProfileActivity extends AppCompatActivity {
-    String name;
-    String email;
-    int age;
-    boolean gender;
+    String original_email;
     SharedPreferences settings;
 
     @Override
@@ -39,17 +46,19 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.profile_activity);
 
         settings = getSharedPreferences(Variables.PREFS_NAME, Context.MODE_PRIVATE);
-        name = settings.getString("name", "");
+        String name = settings.getString("name", "");
         EditText et = (EditText) findViewById(R.id.name_answer);
         et.setText(name);
-        email = settings.getString("email", "");
+        original_email = settings.getString("email", "");
         et = (EditText) findViewById(R.id.email_answer);
-        et.setText(email);
-        age = settings.getInt("age", -1);
-        et = (EditText) findViewById(R.id.age_answer);
-        et.setText(String.valueOf(age));
+        et.setText(original_email);
+        int birthDay = settings.getInt("birthDay", -1);
+        int birthMonth = settings.getInt("birthMonth", -1);
+        int birthYear = settings.getInt("birthYear", -1);
+        DatePicker dp = (DatePicker) findViewById(R.id.age_answer);
+        dp.updateDate(birthYear, birthMonth, birthDay);
         // gender = false => male, gender = true => female
-        gender = settings.getBoolean("gender", true);
+        Boolean gender = settings.getBoolean("gender", true);
         RadioGroup radioGroup = (RadioGroup) findViewById(R.id.gender_answer);
         int radio;
         if (gender)
@@ -60,12 +69,12 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     /**
-     * To finish the register, updating the personal information. It checks that all question have
-     * an answer and that the PIN is corrected. In that case, it saves them, creates a and finishes.
-     * Otherwise, it sets errors for all questions that haven't been answered or have been answered
-     * incorrectly and set focus on the first one with error.
+     * To update the user's personal information. It checks that that the PIN is correct and, in
+     * that case, saves the data in the database and the app and finishes. A {@link Toast} message
+     * is used to inform the user if the data has been successfully updated or there has been any
+     * problem while connecting with the database.
      *
-     * @param view  the clicked {@link View}.
+     * @param view the clicked {@link View}.
      * @see #finish()
      * @see TextView#setError(CharSequence)
      * @see EditText#setError(CharSequence)
@@ -76,7 +85,7 @@ public class ProfileActivity extends AppCompatActivity {
         // check name correction
         EditText name = (EditText) findViewById(R.id.name_answer);
         String name_text = name.getText().toString();
-        if(name_text.equals("")){
+        if (name_text.equals("")) {
             name.setError(getString(R.string.name_blank));
             focusFirstError(name, R.id.name);
             error = true;
@@ -85,27 +94,16 @@ public class ProfileActivity extends AppCompatActivity {
         // check email correction
         EditText email = (EditText) findViewById(R.id.email_answer);
         String email_text = email.getText().toString();
-        if(email_text.equals("")){
+        if (email_text.equals("")) {
             email.setError(getString(R.string.email_blank));
-            if(!error) {
+            if (!error) {
                 focusFirstError(email, R.id.email);
                 error = true;
             }
-        }
-        else if (!email_text.matches(Variables.emailPattern)){
+        } else if (!email_text.matches(Variables.emailPattern)) {
             email.setError(getString(R.string.email_format));
-            if(!error) {
+            if (!error) {
                 focusFirstError(email, R.id.email);
-                error = true;
-            }
-        }
-
-        // check age correction
-        EditText age = (EditText) findViewById(R.id.age_answer);
-        if(age.getText().toString().equals("")) {
-            age.setError(getString(R.string.age_blank));
-            if(!error) {
-                focusFirstError(age, R.id.age);
                 error = true;
             }
         }
@@ -113,10 +111,11 @@ public class ProfileActivity extends AppCompatActivity {
         // check PIN correction
         EditText pin = (EditText) findViewById(R.id.pin_answer);
         String pin_text = pin.getText().toString();
-        String original_pin = String.valueOf(settings.getInt("pin", -1));
+        int pin_number = settings.getInt("pin", -1);
+        String original_pin = String.valueOf(pin_number);
         if (!pin_text.equals(original_pin)) {
             pin.setError(getString(R.string.incorrect_pin));
-            if(!error) {
+            if (!error) {
                 focusFirstError(pin, R.id.pin);
                 error = true;
             }
@@ -124,31 +123,53 @@ public class ProfileActivity extends AppCompatActivity {
 
         // ¿Everything correct?
         if (!error) {
-            // Save register
-            SharedPreferences settings = getSharedPreferences(Variables.PREFS_NAME, Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = settings.edit();
-            editor.putString("name", name_text);
-            editor.putString("email", email_text);
-            editor.putInt("age", Integer.valueOf(pin_text));
+            String user_id = settings.getString("user_id", "");
+            DatePicker birthDate = (DatePicker) findViewById(R.id.age_answer);
             // gender = false => male, gender = true => female
             RadioGroup radioGroup = (RadioGroup) findViewById(R.id.gender_answer);
-            editor.putBoolean("gender", radioGroup.getCheckedRadioButtonId() == R.id.radio_female);
-            editor.commit();
+            boolean gender = radioGroup.getCheckedRadioButtonId() == R.id.radio_female;
+            User user = new User(
+                    email_text,
+                    name_text,
+                    pin_number,
+                    birthDate.getDayOfMonth(),
+                    birthDate.getMonth(),
+                    birthDate.getYear(),
+                    gender,
+                    user_id);
+
+            //Save changes in the server database
+            try {
+                UpdateRegistration runner = new UpdateRegistration();
+                runner.execute(user);
+                int option = runner.get();
+                if (option == 0) {
+                    //Save register in the app
+                    user.save(this);
+                    // Feedback: update profile has been completed
+                    Toast.makeText(this, R.string.changes_saved, Toast.LENGTH_LONG).show();
+                } else if (option == 1) {
+                    Toast.makeText(this, R.string.repeated_email2, Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(this, R.string.update_error, Toast.LENGTH_LONG).show();
+                }
+            } catch (Exception e) {
+                Toast.makeText(this, R.string.update_error, Toast.LENGTH_LONG).show();
+            }
 
             Variables.hideKeyboard(this);
-            Toast.makeText(this, R.string.changes_saved, Toast.LENGTH_LONG).show();
             finish();
         }
     }
 
     /**
-     * requests focus on a {@link EditText} allowing to see its title too. It is used to set focus on the
-     * first question with error.
+     * requests focus on a {@link EditText} allowing to see its title too. It is used to set focus
+     * on the first question with error.
      *
-     * @param et        field we want to set focus in.
-     * @param tv_id     id of the {@link TextView} which is the title of et.
+     * @param et    field we want to set focus in.
+     * @param tv_id id of the {@link TextView} which is the title of et.
      */
-    private void focusFirstError(EditText et, int tv_id){
+    private void focusFirstError(EditText et, int tv_id) {
         et.clearFocus(); // requestRectangle does not work properly if et is focused
         et.requestFocus();
         TextView title = (TextView) findViewById(tv_id);
@@ -181,7 +202,7 @@ public class ProfileActivity extends AppCompatActivity {
          * Creates a {@link HelpActivity} with the terms and conditions text when textView is
          * clicked.
          *
-         * @param textView  the {@link View} clicked
+         * @param textView the {@link View} clicked
          */
         public void onClick(View textView) {
             Intent intent = new Intent(ProfileActivity.this, HelpActivity.class);
@@ -193,15 +214,44 @@ public class ProfileActivity extends AppCompatActivity {
         /**
          * Change the style of the object: blue and not underline
          *
-         * @param ds    TextPaint with the style of the object
+         * @param ds TextPaint with the style of the object
          */
         public void updateDrawState(TextPaint ds) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                ds.setColor(getResources().getColor(R.color.colorSecondary,null));//set text color
+                ds.setColor(getResources().getColor(R.color.colorSecondary, null));//set text color
             } else {
                 ds.setColor(getResources().getColor(R.color.colorSecondary));//set text color
             }
             ds.setUnderlineText(false); // set to false to remove underline
+        }
+    }
+
+    /**
+     * This class is used to update the user's personal data to the MongoDB database.
+     *
+     * @author Ana María Martínez Gómez
+     */
+    private class UpdateRegistration extends AsyncTask<User, Void, Integer> {
+        @Override
+        protected Integer doInBackground(User... params) {
+            try {
+                MongoClientURI mongoClientURI = new MongoClientURI(Variables.mongo_uri);
+                MongoClient mongoClient = new MongoClient(mongoClientURI);
+                MongoDatabase dbMongo = mongoClient.getDatabase(mongoClientURI.getDatabase());
+                MongoCollection<Document> coll = dbMongo.getCollection("users");
+                User local_user = params[0];
+                if (!local_user.getEmail().equals(original_email)) {
+                    Document user = coll.find(eq("email", local_user.getEmail())).first();
+                    if (user != null) {
+                        return 1; // Repeated email
+                    }
+                }
+                coll.updateOne(new Document("_id", new ObjectId(local_user.getId())), new Document("$set", local_user.getRegisterDocument()));
+                mongoClient.close();
+                return 0; //Successfully saved
+            } catch (Exception e) {
+                return 2; // Error
+            }
         }
     }
 

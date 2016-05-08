@@ -401,7 +401,6 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp" />
 
-
             <!-- question 9 - text -->
             <TextView
                 android:id="@+id/question9"
@@ -410,11 +409,11 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/question9"
                 android:layout_below="@+id/question8_rating"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="30dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
 
-            <!-- question 9 - help icon -->
+            <!-- question 8 - help icon -->
             <ImageView
                 android:id="@+id/question9_help"
                 android:src="@android:drawable/ic_menu_help"
@@ -449,6 +448,7 @@
                 android:layout_below="@+id/question9_hl"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp" />
+
 
             <!-- question 10 - text -->
             <TextView
@@ -487,30 +487,16 @@
                 android:layout_alignParentStart="true" />
 
             <!-- question 10 - rating  -->
-            <RadioGroup
+
+            <EditText
                 android:id="@+id/question10_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
                 android:layout_below="@+id/question10_hl"
-                android:layout_marginTop="15dp"
                 android:layout_centerHorizontal="true"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/question10_rating_no"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/no" />
-
-                <RadioButton
-                    android:id="@+id/question10_rating_yes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/yes"
-                    android:layout_marginLeft="70dp"
-                    android:layout_marginStart="70dp"/>
-
-            </RadioGroup>
+                android:layout_marginTop="10dp" />
 
             <!-- question 11 - text -->
             <TextView
@@ -520,7 +506,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/question11"
                 android:layout_below="@+id/question10_rating"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="25dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
 
@@ -549,19 +535,32 @@
                 android:layout_alignParentStart="true" />
 
             <!-- question 11 - rating  -->
-
-            <TimePicker
+            <RadioGroup
                 android:id="@+id/question11_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
                 android:layout_below="@+id/question11_hl"
+                android:layout_marginTop="15dp"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp" />
+                android:orientation="horizontal">
 
+                <RadioButton
+                    android:id="@+id/question11_rating_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no" />
 
-            <!-- question 11 - text -->
+                <RadioButton
+                    android:id="@+id/question11_rating_yes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/yes"
+                    android:layout_marginLeft="70dp"
+                    android:layout_marginStart="70dp"/>
+
+            </RadioGroup>
+
+            <!-- question 12 - text -->
             <TextView
                 android:id="@+id/question12"
                 android:layout_width="wrap_content"
@@ -608,6 +607,7 @@
                 android:layout_below="@+id/question12_hl"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp" />
+
 
             <!-- question 13 - text -->
             <TextView
@@ -657,13 +657,61 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp" />
 
+            <!-- question 14 - text -->
+            <TextView
+                android:id="@+id/question14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/question14"
+                android:layout_below="@+id/question13_rating"
+                android:layout_marginTop="30dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <!-- question 14 - help icon -->
+            <ImageView
+                android:id="@+id/question14_help"
+                android:src="@android:drawable/ic_menu_help"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/question14"
+                android:layout_toEndOf="@+id/question14"
+                android:layout_toRightOf="@+id/question14"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:contentDescription="@+id/help"
+                android:onClick="btnHelp"/>
+
+            <!-- question 14 - horizontal line -->
+            <View
+                android:id="@+id/question14_hl"
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:background="#c0c0c0"
+                android:layout_below="@+id/question14_help"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <!-- question 14 - rating  -->
+
+            <TimePicker
+                android:id="@+id/question14_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:layout_below="@+id/question14_hl"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp" />
+
             <!-- horizontal line -->
             <View
                 android:id="@+id/finish_hl"
                 android:layout_width="fill_parent"
                 android:layout_height="2dp"
                 android:background="#c0c0c0"
-                android:layout_below="@+id/question13_rating"
+                android:layout_below="@+id/question14_rating"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="50dp"/>
@@ -679,7 +727,7 @@
                 android:layout_marginTop="30dp"
                 android:onClick="btnFinish"/>
 
-            <!-- Text for errors -->
+            <!-- Errors -->
             <TextView
                 android:id="@+id/errors"
                 android:layout_width="wrap_content"
@@ -688,7 +736,7 @@
                 android:text=""
                 android:layout_below="@+id/button_finish"
                 android:layout_marginTop="20dp"
-                android:layout_marginBottom="40dp"
+                android:layout_marginBottom="30dp"
                 android:layout_centerHorizontal="true"
                 android:gravity="center"
                 android:textColor="@color/colorPrimary"/>

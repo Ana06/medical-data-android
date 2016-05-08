@@ -70,14 +70,14 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
-        <EditText
+        <DatePicker
             android:id="@+id/age_answer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="number"
-            android:ems="10"
             android:layout_below="@+id/age"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:datePickerMode = "spinner"
+            android:calendarViewShown="false"/>
 
         <!-- gender -->
         <TextView
