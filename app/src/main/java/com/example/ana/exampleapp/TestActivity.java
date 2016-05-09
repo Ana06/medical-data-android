@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.ContentValues;
 import android.view.View;
+import android.widget.NumberPicker;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.EditText;
@@ -72,6 +73,10 @@ public class TestActivity extends AppCompatActivity {
         tp13.setIs24HourView(true);
         tp14.setIs24HourView(true);
 
+        prepareNumberPicker(R.id.question8_rating);
+        prepareNumberPicker(R.id.question9_rating);
+        prepareNumberPicker(R.id.question10_rating);
+
         SharedPreferences settings = getSharedPreferences(Variables.PREFS_NAME, Context.MODE_PRIVATE);
         isFemale = settings.getBoolean("gender", true);
         if (!isFemale) { //the user is a man
@@ -110,12 +115,12 @@ public class TestActivity extends AppCompatActivity {
                 RadioGroup r7 = (RadioGroup) findViewById(R.id.question7_rating);
                 ((RadioButton) r7.getChildAt(c.getInt(7))).setChecked(true);
 
-                EditText r8 = (EditText) findViewById(R.id.question8_rating);
-                EditText r9 = (EditText) findViewById(R.id.question9_rating);
-                EditText r10 = (EditText) findViewById(R.id.question10_rating);
-                r8.setText(String.valueOf(c.getInt(8)));
-                r9.setText(String.valueOf(c.getInt(9)));
-                r10.setText(String.valueOf(c.getInt(10)));
+                NumberPicker r8 = (NumberPicker) findViewById(R.id.question8_rating);
+                r8.setValue(c.getInt(8)-1);
+                NumberPicker r9 = (NumberPicker) findViewById(R.id.question9_rating);
+                r9.setValue(c.getInt(9)-1);
+                NumberPicker r10 = (NumberPicker) findViewById(R.id.question10_rating);
+                r10.setValue(c.getInt(10)-1);
 
                 RadioGroup r11 = (RadioGroup) findViewById(R.id.question11_rating);
                 ((RadioButton) r11.getChildAt(c.getInt(11))).setChecked(true);
@@ -268,13 +273,13 @@ public class TestActivity extends AppCompatActivity {
         }
 
         // Check question 8 (EditText)
-        error = EditTextAnswered(7, R.id.question8_rating, R.id.question8, error);
+        error = NumberPickerAnswered(7, R.id.question8_rating, R.id.question8, error);
 
         // Check question 9 (EditText)
-        error = EditTextAnswered(8, R.id.question9_rating, R.id.question9, error);
+        error = NumberPickerAnswered(8, R.id.question9_rating, R.id.question9, error);
 
         // Check question 10 (EditText)
-        error = EditTextAnswered(9, R.id.question10_rating, R.id.question10, error);
+        error = NumberPickerAnswered(9, R.id.question10_rating, R.id.question10, error);
 
 
         // Check question 11 (RadioGroup)
@@ -361,33 +366,6 @@ public class TestActivity extends AppCompatActivity {
     }
 
     /**
-     * Auxiliar function to get questions 8 to 10 value and set an error if they have not been
-     * answered.
-     *
-     * @param i      Number of question
-     * @param rating {@link RatingStars} id
-     * @param text   {@link TextView} id of the question title
-     * @param error  {@link TextView} title of the first question title whose question has an error
-     * @return <code>true</code> if an error was set; <code>false</code> otherwise.
-     */
-    private TextView EditTextAnswered(int i, int rating, int text, TextView error) {
-        EditText field = (EditText) findViewById(rating);
-        String value = field.getText().toString();
-        TextView tv = (TextView) findViewById(text);
-        if (value.equals("")) {
-            tv.setError("");
-            if (error == null) {
-                field.requestFocus();
-                return tv;
-            }
-        } else {
-            questions[i] = Integer.parseInt(value);
-            tv.setError(null);
-        }
-        return error;
-    }
-
-    /**
      * It finishes the activity.
      *
      * @param view the {@link View} clicked
@@ -395,6 +373,46 @@ public class TestActivity extends AppCompatActivity {
      */
     public void btnChange(View view) {
         finish();
+    }
+
+    /**
+     * Auxiliar function to get questions 8 to 10 value and set an error if they have not been
+     * answered.
+     *
+     * @param i      Number of question
+     * @param id     {@link RatingStars} id
+     * @param text   {@link TextView} id of the question title
+     * @param error  {@link TextView} title of the first question title whose question has an error
+     * @return <code>true</code> if an error was set; <code>false</code> otherwise.
+     */
+    private TextView NumberPickerAnswered(int i, int id, int text, TextView error) {
+        NumberPicker np = (NumberPicker) findViewById(id);
+        int value = np.getValue();
+        TextView tv = (TextView) findViewById(text);
+        if (value == 0) {
+            tv.setError("");
+            if (error == null) {
+                return tv;
+            }
+        } else {
+            questions[i] = value + 1;
+            tv.setError(null);
+        }
+        return error;
+    }
+
+    private void prepareNumberPicker(int id){
+        NumberPicker np = (NumberPicker) findViewById(id);
+        np.setMinValue(0);
+        np.setMaxValue(1001);
+        np.setWrapSelectorWheel(false);
+        np.setFormatter(new NumberPicker.Formatter() {
+            @Override
+            public String format(int i) {
+                if (i == 0) return " ";
+                return String.valueOf(i - 1);
+            }
+        });
     }
 
 }

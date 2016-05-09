@@ -390,16 +390,13 @@
                 android:layout_alignParentStart="true" />
 
             <!-- question 8 - rating  -->
-
-            <EditText
+            <NumberPicker
                 android:id="@+id/question8_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:ems="10"
                 android:layout_below="@+id/question8_hl"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="5dp"/>
 
             <!-- question 9 - text -->
             <TextView
@@ -413,7 +410,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
 
-            <!-- question 8 - help icon -->
+            <!-- question 9 - help icon -->
             <ImageView
                 android:id="@+id/question9_help"
                 android:src="@android:drawable/ic_menu_help"
@@ -438,17 +435,13 @@
                 android:layout_alignParentStart="true" />
 
             <!-- question 9 - rating  -->
-
-            <EditText
+            <NumberPicker
                 android:id="@+id/question9_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:ems="10"
                 android:layout_below="@+id/question9_hl"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp" />
-
+                android:layout_marginTop="5dp"/>
 
             <!-- question 10 - text -->
             <TextView
@@ -487,16 +480,13 @@
                 android:layout_alignParentStart="true" />
 
             <!-- question 10 - rating  -->
-
-            <EditText
+            <NumberPicker
                 android:id="@+id/question10_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:ems="10"
                 android:layout_below="@+id/question10_hl"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="5dp"/>
 
             <!-- question 11 - text -->
             <TextView

@@ -16,8 +16,9 @@ public final class Variables {
     // Regular expression to check email correction
     public static final String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     // MongoDB uri with the IP, authentication (user, password and mechanism), database, etc.
+    // Substitute IP by your server IP
     public static final String mongo_uri =
-            "mongodb://androidUser:1234@192.168.1.53:27017/bipolarDatabase?authMechanism=MONGODB-CR&connectTimeoutMS=2000";
+            "mongodb://androidUser:password@IP:27017/bipolarDatabase?authMechanism=MONGODB-CR&connectTimeoutMS=2000";
 
     /**
      * Final class: to prevent someone from accidentally instantiating the class, we give it an
