@@ -6,7 +6,21 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <!-- android:buttonStyle for v21+ and buttonStyle for the rest -->
+        <item name="buttonStyle">@style/MyCustomButton</item>
+        <item name="android:buttonStyle">@style/MyCustomButton</item>
+        <item name="colorButtonNormal">@color/colorPrimary</item>
+    </style>
 
+    <style name="MyCustomButton" parent="Base.Widget.AppCompat.Button">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+        <item name="android:paddingTop">15dp</item>
+        <item name="android:paddingBottom">15dp</item>
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:paddingRight">15dp</item>
+        <item name="android:minWidth">250dp</item>
+        <!--item name="android:textStyle">bold</item-->
     </style>
 
 </resources>
