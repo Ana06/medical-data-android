@@ -49,7 +49,7 @@ public final class FeedTestContract {
      * @see TimeZone#getRawOffset()
      * @see TimeZone#getDSTSavings()
      */
-    private static Long dateWithTimezone(String timestamp) {
+    public static Long dateWithTimezone(String timestamp) {
         int gmtOffset = TimeZone.getDefault().getRawOffset();
         int gmtDaylightSavings = TimeZone.getDefault().getDSTSavings();
         return (Timestamp.valueOf(timestamp).getTime() + gmtOffset + gmtDaylightSavings);
@@ -98,6 +98,6 @@ public final class FeedTestContract {
                     FeedEntry.COLUMN_NAME_Q11,
                     FeedEntry.COLUMN_NAME_Q12,
                     FeedEntry.COLUMN_NAME_Q13,
-                    FeedEntry.COLUMN_NAME_Q13
+                    FeedEntry.COLUMN_NAME_Q14
             };
 }

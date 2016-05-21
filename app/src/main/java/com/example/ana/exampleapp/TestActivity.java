@@ -25,14 +25,16 @@ import android.database.sqlite.SQLiteDatabase;
  * @author Ana María Martínez Gómez
  */
 public class TestActivity extends AppCompatActivity {
+    private String TAG = "TestActivity";
+    private SharedPreferences settings;
     /*rating stars: no_value = 10. questions 1 and 2 = -3 to 3. questions 3 to 6 = 1 to 5
     radio group: no = 0, si = 1, not_checked = -1 (menstruation 0 by default - men haven't got
                  menstruation)
     text field: no_value = -1
     time fields: in minutes, non_value = -1 */
     private int[] questions = new int[]{10, 10, 10, 10, 10, 10, 0, -1, -1, -1, -1, -1, -1, -1};
-    long pin_time;
-    long pin_time_total;
+    int pin_time;
+    int pin_time_total;
     int pin_tries;
     private boolean repeating_test;
     private boolean isFemale;
@@ -60,8 +62,8 @@ public class TestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         Intent intent = getIntent();
-        pin_time = intent.getLongExtra("PIN_TIME", 0);
-        pin_time_total = intent.getLongExtra("PIN_TIME_TOTAL", 0);
+        pin_time = intent.getIntExtra("PIN_TIME", 0);
+        pin_time_total = intent.getIntExtra("PIN_TIME_TOTAL", 0);
         pin_tries = intent.getIntExtra("PIN_TRIES", 0);
         setContentView(R.layout.test_activity);
 
@@ -76,7 +78,7 @@ public class TestActivity extends AppCompatActivity {
         prepareNumberPicker(R.id.question9_rating);
         prepareNumberPicker(R.id.question10_rating);
 
-        SharedPreferences settings = getSharedPreferences(Variables.PREFS_NAME, Context.MODE_PRIVATE);
+        settings = getSharedPreferences(Variables.PREFS_NAME, Context.MODE_PRIVATE);
         isFemale = settings.getBoolean("gender", true);
         if (!isFemale) { //the user is a man
             RelativeLayout gender_layout = (RelativeLayout) findViewById(R.id.question7_layout);
@@ -115,30 +117,30 @@ public class TestActivity extends AppCompatActivity {
                 ((RadioButton) r7.getChildAt(c.getInt(7))).setChecked(true);
 
                 NumberPicker r8 = (NumberPicker) findViewById(R.id.question8_rating);
-                r8.setValue(c.getInt(8)-1);
+                r8.setValue(c.getInt(8) - 1);
                 NumberPicker r9 = (NumberPicker) findViewById(R.id.question9_rating);
-                r9.setValue(c.getInt(9)-1);
+                r9.setValue(c.getInt(9) - 1);
                 NumberPicker r10 = (NumberPicker) findViewById(R.id.question10_rating);
-                r10.setValue(c.getInt(10)-1);
+                r10.setValue(c.getInt(10) - 1);
 
                 RadioGroup r11 = (RadioGroup) findViewById(R.id.question11_rating);
                 ((RadioButton) r11.getChildAt(c.getInt(11))).setChecked(true);
 
                 //Taking into account deprecated methods
                 if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
-                    tp12.setHour(c.getInt(11) / 60);
-                    tp12.setMinute(c.getInt(11) % 60);
-                    tp13.setHour(c.getInt(12) / 60);
-                    tp13.setMinute(c.getInt(12) % 60);
-                    tp14.setHour(c.getInt(13) / 60);
-                    tp14.setMinute(c.getInt(13) % 60);
+                    tp12.setHour(c.getInt(12) / 60);
+                    tp12.setMinute(c.getInt(12) % 60);
+                    tp13.setHour(c.getInt(13) / 60);
+                    tp13.setMinute(c.getInt(13) % 60);
+                    tp14.setHour(c.getInt(14) / 60);
+                    tp14.setMinute(c.getInt(14) % 60);
                 } else {
-                    tp12.setCurrentHour(c.getInt(11) / 60);
-                    tp12.setCurrentMinute(c.getInt(11) % 60);
-                    tp13.setCurrentHour(c.getInt(12) / 60);
-                    tp13.setCurrentMinute(c.getInt(12) % 60);
-                    tp14.setCurrentHour(c.getInt(13) / 60);
-                    tp14.setCurrentMinute(c.getInt(13) % 60);
+                    tp12.setCurrentHour(c.getInt(12) / 60);
+                    tp12.setCurrentMinute(c.getInt(12) % 60);
+                    tp13.setCurrentHour(c.getInt(13) / 60);
+                    tp13.setCurrentMinute(c.getInt(13) % 60);
+                    tp14.setCurrentHour(c.getInt(14) / 60);
+                    tp14.setCurrentMinute(c.getInt(14) % 60);
                 }
 
                 has_test = c.moveToNext(); //has_test = false if it only has one row
@@ -321,13 +323,21 @@ public class TestActivity extends AppCompatActivity {
                 values.put(FeedTestContract.QUESTION_COLUMNS_NAMES[i], questions[i]);
             if (repeating_test) {
                 //If test has already been filled, we delete the last entry from the database
-                String selection = "_ID = (SELECT MAX(_ID) FROM " + FeedTestContract.FeedEntry.TABLE_NAME + ")";
+                String selection =
+                        "_ID = (SELECT MAX(_ID) FROM " + FeedTestContract.FeedEntry.TABLE_NAME + ")";
                 db.delete(FeedTestContract.FeedEntry.TABLE_NAME, selection, null);
             }
             db.insert(
                     FeedTestContract.FeedEntry.TABLE_NAME,
                     null,
                     values);
+            int local_tests = settings.getInt("local_tests", 0);
+            if (!repeating_test || local_tests == 0) {
+                Variables.saveLocalTests(TAG, settings, local_tests + 1);
+            }
+
+            SendTest runner = new SendTest();
+            runner.execute(this);
 
             setContentView(R.layout.finish_activity);
         } else {
@@ -378,10 +388,10 @@ public class TestActivity extends AppCompatActivity {
      * Auxiliar function to get questions 8 to 10 value and set an error if they have not been
      * answered.
      *
-     * @param i      Number of question
-     * @param id     {@link RatingStars} id
-     * @param text   {@link TextView} id of the question title
-     * @param error  {@link TextView} title of the first question title whose question has an error
+     * @param i     Number of question
+     * @param id    {@link RatingStars} id
+     * @param text  {@link TextView} id of the question title
+     * @param error {@link TextView} title of the first question title whose question has an error
      * @return <code>true</code> if an error was set; <code>false</code> otherwise.
      */
     private TextView NumberPickerAnswered(int i, int id, int text, TextView error) {
@@ -400,7 +410,13 @@ public class TestActivity extends AppCompatActivity {
         return error;
     }
 
-    private void prepareNumberPicker(int id){
+    /**
+     * Customizes the options shown in the {@link NumberPicker}s to represent i with the string i -1
+     * and 0 with a blank option
+     *
+     * @param id
+     */
+    private void prepareNumberPicker(int id) {
         NumberPicker np = (NumberPicker) findViewById(id);
         np.setMinValue(0);
         np.setMaxValue(1001);

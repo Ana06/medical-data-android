@@ -60,7 +60,8 @@ public class RegisterActivity extends AppCompatActivity {
      * all question have been answered and the terms and conditions agreed. In that case, it saves
      * them, creates a {@link FinishRegisterActivity} and finish. Otherwise, it sets errors for all
      * questions that haven't been answered or have been answered incorrectly and set focus on the
-     * first one with error.
+     * first one with error. It also checks that there is internet connection before trying to
+     * connect with the database.
      *
      * @param view the clicked {@link View}.
      * @see #finish()
@@ -139,37 +140,41 @@ public class RegisterActivity extends AppCompatActivity {
 
         // ¿Everything correct?
         if (!error) {
-            DatePicker birthDate = (DatePicker) findViewById(R.id.age_answer);
-            birth_day = birthDate.getDayOfMonth();
-            birth_month = birthDate.getMonth();
-            birth_year = birthDate.getYear();
-            RadioGroup radioGroup = (RadioGroup) findViewById(R.id.gender_answer);
-            // gender = false => male, gender = true => female
-            gender = radioGroup.getCheckedRadioButtonId() == R.id.radio_female;
+            if (Variables.connection(this) < 0)
+                Toast.makeText(this, R.string.no_internet, Toast.LENGTH_LONG).show();
+            else {
+                DatePicker birthDate = (DatePicker) findViewById(R.id.age_answer);
+                birth_day = birthDate.getDayOfMonth();
+                birth_month = birthDate.getMonth();
+                birth_year = birthDate.getYear();
+                RadioGroup radioGroup = (RadioGroup) findViewById(R.id.gender_answer);
+                // gender = false => male, gender = true => female
+                gender = radioGroup.getCheckedRadioButtonId() == R.id.radio_female;
 
 
-            //Save register in the server database
-            try {
-                User user = new User(email_text, name_text, pin_number, birth_day, birth_month, birth_year, gender);
-                SendRegistration runner = new SendRegistration();
-                runner.execute(user);
-                int option = runner.get();
-                if (option == 0) {
-                    //Save register in the app
-                    user.save(this);
-                    // Feedback: register has been completed
-                    Intent intent = new Intent(this, FinishRegisterActivity.class);
-                    startActivity(intent);
-                } else if (option == 1) {
-                    Toast.makeText(this, R.string.repeated_email, Toast.LENGTH_LONG).show();
-                } else {
+                //Save register in the server database
+                try {
+                    User user = new User(email_text, name_text, pin_number, birth_day, birth_month, birth_year, gender);
+                    SendRegistration runner = new SendRegistration();
+                    runner.execute(user);
+                    int option = runner.get();
+                    if (option == 0) {
+                        //Save register in the app
+                        user.save(this);
+                        // Feedback: register has been completed
+                        Intent intent = new Intent(this, FinishRegisterActivity.class);
+                        startActivity(intent);
+                    } else if (option == 1) {
+                        Toast.makeText(this, R.string.repeated_email, Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(this, R.string.register_error, Toast.LENGTH_LONG).show();
+                    }
+                } catch (Exception e) {
                     Toast.makeText(this, R.string.register_error, Toast.LENGTH_LONG).show();
                 }
-            } catch (Exception e) {
-                Toast.makeText(this, R.string.register_error, Toast.LENGTH_LONG).show();
+                Variables.hideKeyboard(this);
+                finish();
             }
-            Variables.hideKeyboard(this);
-            finish();
         }
     }
 

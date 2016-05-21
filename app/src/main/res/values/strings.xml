@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Bip4cast</string>
 
+    <string name="no_internet">Internet connection is needed</string>
+
     <!-- menu -->
     <string name="profile">Profile</string>
     <string name="configuration">Configuration</string>
@@ -103,7 +105,8 @@
 
     <!-- configuration_activity -->
     <string name="configuration_title">CONFIGURATION</string>
-    <string name="configuration_location">Permitir recoger datos sobre la ubicación.</string>
+    <string name="configuration_internet">Allow to use mobile data to send information.</string>
+    <string name="configuration_location">Allow to collect information about location.</string>
 
     <!-- information_activity -->
     <string name="version">VERSION 2.1</string>

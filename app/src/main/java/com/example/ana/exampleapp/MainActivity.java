@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //Initialization of shared preferences, mDbHelper
         settings = getSharedPreferences(Variables.PREFS_NAME, Context.MODE_PRIVATE);
         FeedTestDbHelper mDbHelper = new FeedTestDbHelper(this);
         readable_db = mDbHelper.getReadableDatabase();
@@ -170,8 +169,8 @@ public class MainActivity extends AppCompatActivity {
         pin_tries++;
         if (!pinText.equals("") && pin == Integer.parseInt(pinText)) {
             //The PIN is correct
-            long pin_time = (System.nanoTime() - startTime) / 1000000; // in milliseconds
-            long pin_time_total = (System.nanoTime() - startTotalTime) / 1000000; // in milliseconds
+            int pin_time = (int) ((System.nanoTime() - startTime) / 1000000); // in milliseconds
+            int pin_time_total = (int) ((System.nanoTime() - startTotalTime) / 1000000); // in milliseconds
             Intent intent = new Intent(this, TestActivity.class);
             intent.putExtra("PIN_TIME", pin_time);
             intent.putExtra("PIN_TIME_TOTAL", pin_time_total);
@@ -185,11 +184,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Check if the email is in the database and the password is correct and, in that case,
+     * Checks if the email is in the database and the password is correct and, in that case,
      * download the user information from the database and creates a {@link FinishRegisterActivity}
-     * to confirm that the sign up process has been completed successfully. If the data introduced
-     * is not correct or there is any problem while connecting with the database the user is
-     * informed using a {@link Toast} message.
+     * to confirm that the sign up process has been completed successfully. It also checks that
+     * there is internet connection before trying to connect with the database.If the data
+     * introduced is not correct or there is any problem while connecting with the database the user
+     * is informed using a {@link Toast} message.
      *
      * @param view the {@link View} clicked
      */
@@ -210,39 +210,48 @@ public class MainActivity extends AppCompatActivity {
             error = true;
         }
         if (!error) {
-            int pin_number = Integer.parseInt(pin.getText().toString());
-            User user = new User(email_text, pin_number);
+            if (Variables.connection(this) < 0)
+                Toast.makeText(this, R.string.no_internet, Toast.LENGTH_LONG).show();
+            else {
+                int pin_number = Integer.parseInt(pin.getText().toString());
+                User user = new User(email_text, pin_number);
 
-            //Save register in the server database
-            try {
-                DownloadRegistration runner = new DownloadRegistration();
-                runner.execute(user);
-                int option = runner.get();
-                if (option == 0) {
-                    //Save register in the app
-                    user.save(this);
-                    // Feedback: register has been completed
-                    Intent intent = new Intent(this, FinishRegisterActivity.class);
-                    startActivity(intent);
-                } else if (option == 1) {
-                    Toast.makeText(this, R.string.wrong_data, Toast.LENGTH_LONG).show();
-                } else {
+                //Save register in the server database
+                try {
+                    DownloadRegistration runner = new DownloadRegistration();
+                    runner.execute(user);
+                    int option = runner.get();
+                    if (option == 0) {
+                        //Save register in the app
+                        user.save(this);
+                        // Feedback: register has been completed
+                        Intent intent = new Intent(this, FinishRegisterActivity.class);
+                        startActivity(intent);
+                    } else if (option == 1) {
+                        Toast.makeText(this, R.string.wrong_data, Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(this, R.string.register_error, Toast.LENGTH_LONG).show();
+                    }
+                } catch (Exception e) {
                     Toast.makeText(this, R.string.register_error, Toast.LENGTH_LONG).show();
                 }
-            } catch (Exception e) {
-                Toast.makeText(this, R.string.register_error, Toast.LENGTH_LONG).show();
             }
         }
     }
 
     /**
-     * Creates a {@link RegisterActivity}
+     * Creates a {@link RegisterActivity} if there is internet connection. Otherwise a {@link Toast}
+     * message is showed to informed that internet connection is needed.
      *
      * @param view the {@link View} clicked
      */
     public void btnSignUp(View view) {
-        Intent intent = new Intent(this, RegisterActivity.class);
-        startActivity(intent);
+        if (Variables.connection(this) < 0)
+            Toast.makeText(this, R.string.no_internet, Toast.LENGTH_LONG).show();
+        else {
+            Intent intent = new Intent(this, RegisterActivity.class);
+            startActivity(intent);
+        }
     }
 
     /**

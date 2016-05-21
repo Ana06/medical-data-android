@@ -36,22 +36,23 @@
         android:maxWidth="260dp"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/configuration_location"
+        android:text="@string/configuration_internet"
         android:id="@+id/configuration1"
         android:layout_marginTop="35dp"
         android:layout_below="@+id/hl"
         android:layout_alignLeft="@+id/title"
         android:layout_alignStart="@+id/title" />
 
-    <RadioButton
+    <CheckBox
+        android:id="@+id/checkbox_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/radioButton1"
         android:layout_alignTop="@+id/configuration1"
         android:layout_toRightOf="@+id/configuration1"
         android:layout_toEndOf="@+id/configuration1"
         android:layout_marginStart="35dp"
         android:layout_marginLeft="35dp"
-        android:checked="true" />
+        android:checked="true"
+        android:onClick="onCheckBoxClick"/>
 
 </RelativeLayout>

@@ -246,7 +246,11 @@ public class ProfileActivity extends AppCompatActivity {
                         return 1; // Repeated email
                     }
                 }
-                coll.updateOne(new Document("_id", new ObjectId(local_user.getId())), new Document("$set", local_user.getRegisterDocument()));
+
+                Document search = new Document("_id", new ObjectId(local_user.getId()));
+                Document replacement = new Document("$set", local_user.getRegisterDocument());
+                // We update some fields of the documents without affecting the rest
+                coll.updateOne(search, replacement);
                 mongoClient.close();
                 return 0; //Successfully saved
             } catch (Exception e) {
