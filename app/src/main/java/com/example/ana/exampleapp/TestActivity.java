@@ -336,9 +336,11 @@ public class TestActivity extends AppCompatActivity {
                 Variables.saveLocalTests(TAG, settings, local_tests + 1);
             }
 
-            SendTest runner = new SendTest();
-            runner.execute(this);
+            // We start a service that send the tests to the server database.
+            Intent service = new Intent(this, TestsService.class);
+            startService(service);
 
+            // Visual feedback to notify that the test has been saved.
             setContentView(R.layout.finish_activity);
         } else {
             // Show a message to indicate that the test can't be sent.

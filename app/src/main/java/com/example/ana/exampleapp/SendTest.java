@@ -1,10 +1,13 @@
 package com.example.ana.exampleapp;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import android.app.Activity;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
@@ -19,11 +22,6 @@ import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
 import static com.mongodb.client.model.Filters.*;
 
 
@@ -32,7 +30,7 @@ import static com.mongodb.client.model.Filters.*;
  *
  * @autor Ana María Martínez Gómez
  */
-class SendTest extends AsyncTask<Context, Void, Void> {
+class SendTest extends AsyncTask<Context, Void, Boolean> {
     private String TAG = "SendTest";
     DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private final String[] projection = {
@@ -57,11 +55,12 @@ class SendTest extends AsyncTask<Context, Void, Void> {
     };
 
     @Override
-    protected Void doInBackground(Context... params) {
+    protected Boolean doInBackground(Context... params) {
         Context context = params[0];
         SharedPreferences settings =
                 context.getSharedPreferences(Variables.PREFS_NAME, Context.MODE_PRIVATE);
         int local_tests = settings.getInt("local_tests", 0);
+        Log.v(TAG, "Tests: " + String.valueOf(local_tests));
         if (local_tests > 0 && canConnect(context, settings)) {
             try {
                 MongoClientURI mongoClientURI = new MongoClientURI(Variables.mongo_uri);
@@ -108,14 +107,10 @@ class SendTest extends AsyncTask<Context, Void, Void> {
             Variables.saveLocalTests(TAG, settings, local_tests);
         }
 
-        ComponentName receiver = new ComponentName(context, NetworkChangeReceiver.class);
-        PackageManager pm = context.getPackageManager();
-        int flag = (local_tests > 0 ?
-                PackageManager.COMPONENT_ENABLED_STATE_ENABLED :
-                PackageManager.COMPONENT_ENABLED_STATE_DISABLED);
-        pm.setComponentEnabledSetting(receiver, flag, PackageManager.DONT_KILL_APP);
-        Log.v(TAG, "Flag: " + (flag == 1 ? "enabled" : "disabled"));
-        return null;
+        boolean start = (local_tests > 0);
+        Log.v(TAG, "Flag: " + (start ? "enabled" : "disabled") +
+                ", Tests: " + String.valueOf(local_tests));
+        return start;
     }
 
     /**

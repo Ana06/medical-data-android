@@ -234,9 +234,9 @@ public class RegisterActivity extends AppCompatActivity {
          */
         public void updateDrawState(TextPaint ds) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                ds.setColor(getResources().getColor(R.color.colorSecondary, null));//set text color
+                ds.setColor(getResources().getColor(R.color.colorAccent, null));//set text color
             } else {
-                ds.setColor(getResources().getColor(R.color.colorSecondary));//set text color
+                ds.setColor(getResources().getColor(R.color.colorAccent));//set text color
             }
             ds.setUnderlineText(false); // set to false to remove underline
         }

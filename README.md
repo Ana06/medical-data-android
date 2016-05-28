@@ -1,6 +1,6 @@
 # Android app to collect medical data
 
-Android app to collect data to be analyzed for medical purposes. [Android Studio](http://developer.android.com/intl/es/tools/studio/index.html) is being used to develop the app. Bip4cast.apk can be used to install the last stable version of the app in your Android device. 
+Android app to collect data to be analyzed for medical purposes. [Android Studio](http://developer.android.com/intl/es/tools/studio/index.html) is being used to develop the app. **Bip4cast.apk** can be used to install the last stable version of the app in your Android device. 
 
 
 ## Prototyping

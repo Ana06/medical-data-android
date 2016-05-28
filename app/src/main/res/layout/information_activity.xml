@@ -58,7 +58,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/see_terms"
-        android:textColor="@color/colorSecondary"
+        android:textColor="@color/colorAccent"
         android:id="@+id/terms"
         android:layout_below="@+id/author"
         android:layout_centerHorizontal="true"

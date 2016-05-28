@@ -16,6 +16,7 @@ import android.view.inputmethod.InputMethodManager;
  * @author Ana María Martínez Gómez
  */
 public final class Variables {
+    // The server IP
     private static final String IP = "IP";
     private static final String PORT = "27017";
     // MongoDB uri with the IP, authentication (user, password and mechanism), database, etc.

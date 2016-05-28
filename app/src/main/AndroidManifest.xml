@@ -8,7 +8,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -16,27 +17,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity">
-        </activity>
-        <activity android:name=".FinishRegisterActivity" >
-        </activity>
-        <activity android:name=".TestActivity">
-        </activity>
-        <activity android:name=".HelpActivity" >
-        </activity>
-        <activity android:name=".ProfileActivity"
-            android:windowSoftInputMode="stateHidden">
-        </activity>
-        <activity android:name=".ConfigurationActivity" >
-        </activity>
-        <activity android:name=".InformationActivity" >
-        </activity>
-        <receiver android:name=".NetworkChangeReceiver"
-            android:enabled="false">
-            <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
-            </intent-filter>
-        </receiver>
+        <activity android:name=".RegisterActivity"></activity>
+        <activity android:name=".FinishRegisterActivity"></activity>
+        <activity android:name=".TestActivity"></activity>
+        <activity android:name=".HelpActivity"></activity>
+        <activity
+            android:name=".ProfileActivity"
+            android:windowSoftInputMode="stateHidden"></activity>
+        <activity android:name=".ConfigurationActivity"></activity>
+        <activity android:name=".InformationActivity"></activity>
+        <service android:name=".TestsService"></service>
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
