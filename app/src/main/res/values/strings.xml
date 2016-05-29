@@ -110,7 +110,7 @@
 
     <!-- information_activity -->
     <string name="version">VERSION 2.1</string>
-    <string name="developed_by">Developed by Ana María Martínez Gómez</string>
+    <string name="developed_by">Developed by Ana María Martínez Gómez in a project at UCM</string>
     <string name="see_terms">See terms and conditions</string>
 
 </resources>

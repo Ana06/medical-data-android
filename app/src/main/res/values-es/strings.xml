@@ -108,6 +108,6 @@
 
     <!-- information_activity -->
     <string name="version">VERSIÓN 2.1</string>
-    <string name="developed_by">Desarrollada por Ana María Martínez Gómez</string>
+    <string name="developed_by">Desarrollada por Ana María Martínez Gómez como TFG en la UCM</string>
     <string name="see_terms">Ver términos y condiciones legales</string>
 </resources>
