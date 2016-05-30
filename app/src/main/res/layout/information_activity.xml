@@ -1,69 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<RelativeLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    tools:context="${relativePackage}.${activityClass}">>
+    android:layout_height="fill_parent"
+    tools:context="${relativePackage}.${activityClass}">
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="43sp"
-        android:text="@string/app_name"
-        android:textStyle="bold"
-        android:textColor="@color/colorPrimary"
-        android:layout_marginTop="45dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="170dp"
-        android:id="@+id/logo"
-        android:src="@drawable/logo"
-        android:layout_below="@+id/title"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp" />
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin" >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/version"
-        android:id="@+id/version"
-        android:layout_below="@+id/logo"
-        android:layout_centerHorizontal="true"
-        android:textStyle="bold"
-        android:layout_marginTop="38dp" />
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="43sp"
+                android:text="@string/app_name"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
+                android:layout_marginTop="45dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
 
-    <!-- It is not allowed to eliminated the author(s) name(s)-->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="@string/developed_by"
-        android:id="@+id/author"
-        android:layout_below="@+id/version"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="100dp"
-        android:layout_marginRight="100dp"
-        android:gravity="center"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="170dp"
+                android:id="@+id/logo"
+                android:src="@drawable/logo"
+                android:layout_below="@+id/title"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/see_terms"
-        android:textColor="@color/colorAccent"
-        android:id="@+id/terms"
-        android:layout_below="@+id/author"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp"
-        android:clickable="true"
-        android:onClick="seeTerms"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/version"
+                android:id="@+id/version"
+                android:layout_below="@+id/logo"
+                android:layout_centerHorizontal="true"
+                android:textStyle="bold"
+                android:layout_marginTop="38dp" />
 
-</RelativeLayout>
+            <!-- It is not allowed to eliminated the author(s) name(s)-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/developed_by"
+                android:id="@+id/author"
+                android:layout_below="@+id/version"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="45dp"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/see_terms"
+                android:textColor="@color/colorAccent"
+                android:id="@+id/terms"
+                android:layout_below="@+id/author"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="50dp"
+                android:clickable="true"
+                android:onClick="seeTerms"/>
+
+        </RelativeLayout>
+    </FrameLayout>
+</ScrollView>

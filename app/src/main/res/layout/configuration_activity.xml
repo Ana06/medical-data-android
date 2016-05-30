@@ -1,58 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     tools:context="${relativePackage}.${activityClass}">
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/configuration_title"
-        android:layout_marginTop="17dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginLeft="5dp"
-        android:textColor="#050505" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <!-- question 6 - horizontal line -->
-    <View
-        android:id="@+id/hl"
-        android:layout_width="fill_parent"
-        android:layout_height="2dp"
-        android:background="#c0c0c0"
-        android:layout_below="@+id/title"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin" >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:maxWidth="260dp"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/configuration_internet"
-        android:id="@+id/configuration1"
-        android:layout_marginTop="35dp"
-        android:layout_below="@+id/hl"
-        android:layout_alignLeft="@+id/title"
-        android:layout_alignStart="@+id/title" />
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/configuration_title"
+                android:layout_marginTop="17dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:textColor="#050505" />
 
-    <CheckBox
-        android:id="@+id/checkbox_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/configuration1"
-        android:layout_toRightOf="@+id/configuration1"
-        android:layout_toEndOf="@+id/configuration1"
-        android:layout_marginStart="35dp"
-        android:layout_marginLeft="35dp"
-        android:checked="true"
-        android:onClick="onCheckBoxClick"/>
+            <!-- question 6 - horizontal line -->
+            <View
+                android:id="@+id/hl"
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:background="#c0c0c0"
+                android:layout_below="@+id/title"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
 
-</RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:maxWidth="260dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/configuration_internet"
+                android:id="@+id/configuration1"
+                android:layout_marginTop="35dp"
+                android:layout_below="@+id/hl"
+                android:layout_alignLeft="@+id/title"
+                android:layout_alignStart="@+id/title" />
+
+            <CheckBox
+                android:id="@+id/checkbox_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:onClick="onCheckBoxClick"
+                android:layout_alignTop="@+id/configuration1"
+                android:layout_alignRight="@+id/hl"
+                android:layout_alignEnd="@+id/hl" />
+
+        </RelativeLayout>
+    </FrameLayout>
+</ScrollView>
