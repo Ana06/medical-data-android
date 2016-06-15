@@ -1,8 +1,8 @@
 # Android app to collect medical data
 
-Android app to collect data to be analyzed for medical purposes. This mobile app is part of my final degree project at [UCM](https://www.ucm.es), and is being used in the project [Bip4cast](http://www.bip4cast.org).
+Android app to collect data to be analyzed for medical purposes. This mobile app is part of my final degree project at [UCM](https://www.ucm.es). It is being used in the project [Bip4cast](http://www.bip4cast.org), in which data of patients from the [San Juan de Dios hospital](http://www.nuestraseñoradelapaz.es) is being collected with the objective of improving the treatment of the bipolar disorder whose crises that can be avoided through early prediction.
 
-[Android Studio](http://developer.android.com/intl/es/tools/studio/index.html) is being used to develop the app. **Bip4cast.apk** can be used to install the last stable version of the app in your Android device. Screenshots of the application in a device with Android 6.0.1 can be seen in [screenshots](https://github.com/Ana06/medical-data-android/tree/master/screenshots) and [screenshots_ES](https://github.com/Ana06/medical-data-android/tree/master/screenshots_ES).
+[Android Studio](http://developer.android.com/intl/es/tools/studio/index.html) is being used to develop the app. **Bip4cast.apk** can be used to install the last stable version of the app in your Android device. Screenshots of the application in a device with Android 6.0.1 can be seen in [screenshots](https://github.com/Ana06/medical-data-android/tree/master/screenshots) and [screenshots_ES](https://github.com/Ana06/medical-data-android/tree/master/screenshots_ES). Also, a video of the app in the same device can be seen in the following link: [https://youtu.be/InZCw9WAZzI](https://youtu.be/InZCw9WAZzI).
 
 <img src=/screenshots/main.jpg width=384 height=640 alt='Main screen' />
 <img src=/screenshots/test.jpg width=384 height=640 alt='Daily test' />
@@ -28,7 +28,7 @@ This project adhere to the official [Android Code Style Guidelines](http://sourc
 
 ## Authors
 
-This project is being developed by Ana María Martínez Gómez.
+This project is being developed by Ana María Martínez Gómez, but contributors are welcome!
 
 
 ## Licence
