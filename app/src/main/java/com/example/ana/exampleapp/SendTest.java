@@ -51,7 +51,9 @@ class SendTest extends AsyncTask<Context, Void, Boolean> {
             FeedTestContract.FeedEntry.COLUMN_NAME_Q11,
             FeedTestContract.FeedEntry.COLUMN_NAME_Q12,
             FeedTestContract.FeedEntry.COLUMN_NAME_Q13,
-            FeedTestContract.FeedEntry.COLUMN_NAME_Q14
+            FeedTestContract.FeedEntry.COLUMN_NAME_Q14,
+            FeedTestContract.FeedEntry.COLUMN_LATITUDE,
+            FeedTestContract.FeedEntry.COLUMN_LONGITUDE
     };
 
     @Override
@@ -175,7 +177,9 @@ class SendTest extends AsyncTask<Context, Void, Boolean> {
                 .append("drugs", drugs)
                 .append("timeBed", c.getInt(15))
                 .append("timeSleep", c.getInt(16))
-                .append("timeWakeUp", c.getInt(17));
+                .append("timeWakeUp", c.getInt(17))
+                .append("latitude", c.getInt(18))
+                .append("longitude", c.getInt(19));
         if (isFemale) {
             document.append("menstruation", c.getInt(10));
         }

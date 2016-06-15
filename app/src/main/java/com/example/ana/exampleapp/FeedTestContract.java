@@ -80,6 +80,10 @@ public final class FeedTestContract {
         public static final String COLUMN_NAME_Q13 = "timeSleep"; // Integer (minutes)
         public static final String COLUMN_NAME_Q14 = "timeWakeUp"; // Integer (minutes)
         public static final String COLUMN_NAME_TIMESTAMP = "timestamp"; // Timestamp
+        public static final String COLUMN_LATITUDE = "latitude"; // Latitude
+        public static final String COLUMN_LONGITUDE = "longitude"; // Longitude
+
+
     }
 
     //To make database management easier in TestActivity

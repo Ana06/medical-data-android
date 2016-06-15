@@ -14,9 +14,11 @@ import android.widget.CheckBox;
  * disable
  *
  * @author Ana María Martínez Gómez
+ * @author Niels Jacot
  */
 public class ConfigurationActivity extends AppCompatActivity {
     private boolean isChecked;
+    private boolean isLocationChecked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +28,10 @@ public class ConfigurationActivity extends AppCompatActivity {
         isChecked = !(settings.getBoolean("only_wifi", false));
         final CheckBox checkBox = (CheckBox) findViewById(R.id.checkbox_id);
         checkBox.setChecked(isChecked);
+        //Location
+        isLocationChecked = (settings.getBoolean("Location_enabled",true));
+        final CheckBox locationCheckbox = (CheckBox) findViewById(R.id.checkBox_Location_Id);
+        locationCheckbox.setChecked(isLocationChecked);
     }
 
     /**
@@ -45,4 +51,20 @@ public class ConfigurationActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Called when the {@link CheckBox} is clicked to allow the location collect data.
+     *
+     * @param checkBox The {@link CheckBox} clicked.
+     */
+    public void onCheckBoxLocationClick(View checkBox) {
+        boolean isCheckedNow = ((CheckBox) checkBox).isChecked();
+        if (isCheckedNow != isLocationChecked) {
+            SharedPreferences settings = getSharedPreferences(Variables.PREFS_NAME, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putBoolean("Location_enabled", isCheckedNow);
+            editor.commit();
+            isLocationChecked = isCheckedNow;
+            Log.v("ConfigurationActivity:", "Location authorization: " + isCheckedNow);
+        }
+    }
 }

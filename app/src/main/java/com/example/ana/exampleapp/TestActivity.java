@@ -1,5 +1,9 @@
 package com.example.ana.exampleapp;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Build;
@@ -7,6 +11,7 @@ import android.content.Intent;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.ContentValues;
+import android.util.Log;
 import android.view.View;
 import android.widget.NumberPicker;
 import android.widget.RelativeLayout;
@@ -23,6 +28,7 @@ import android.database.sqlite.SQLiteDatabase;
  * Class that manages the diary text, whose recollection is the main aim of the app.
  *
  * @author Ana María Martínez Gómez
+ * @author Niels Jacot
  */
 public class TestActivity extends AppCompatActivity {
     private String TAG = "TestActivity";
@@ -56,6 +62,10 @@ public class TestActivity extends AppCompatActivity {
             FeedTestContract.FeedEntry.COLUMN_NAME_Q13,
             FeedTestContract.FeedEntry.COLUMN_NAME_Q14
     };
+    //Variables to handle the location
+    private GPSManager gps;
+    private double latitude, longitude;
+    private boolean allowLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,7 +170,58 @@ public class TestActivity extends AppCompatActivity {
             r5.updateColor();
             r6.updateColor();
         }
+
+        allowLocation = settings.getBoolean("Location_enabled", true);
+        if (allowLocation) {
+            //if api > 23 then the user must grant the permission to access the network or location
+            boolean checkVersion = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M;
+            boolean checkAccessFineLocation = ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED;
+            boolean checkCoarseLocation = ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED;
+            if (checkVersion && checkAccessFineLocation && checkCoarseLocation) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+
+            } else {
+                handleLocation();
+            }
+
+        }
     }
+
+    /**
+     * Method called after the user weither or not he decide to share his location
+     *
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        if (requestCode == 1) {
+            //User accepted to share his location
+            handleLocation();
+        } else {
+            //the user decided no to accept to share his location.
+            allowLocation = false;
+        }
+    }
+
+    /**
+     * create new object gps and check if it can
+     * retrieve location from network or gps
+     */
+    private void handleLocation() {
+        //Add the location (latitude;longitude) to the db
+        gps = new GPSManager(TestActivity.this);
+        // check if GPS enabled
+        if (gps.canGetLocation()) {
+            latitude = gps.getLatitude();
+            longitude = gps.getLongitude();
+        } else {
+            gps.showSettingsAlert();
+
+        }
+    }
+
 
     /**
      * Creates a {@link HelpActivity} providing it a question and a help text
@@ -321,6 +382,16 @@ public class TestActivity extends AppCompatActivity {
             values.put(FeedTestContract.FeedEntry.COLUMN_NAME_PIN_TRIES, pin_tries);
             for (int i = 0; i < questions.length; i++)
                 values.put(FeedTestContract.QUESTION_COLUMNS_NAMES[i], questions[i]);
+
+            //Add the location (latitude;longitude) to the db
+            if (allowLocation) {
+                values.put(FeedTestContract.FeedEntry.COLUMN_LATITUDE, latitude);
+                values.put(FeedTestContract.FeedEntry.COLUMN_LONGITUDE, longitude);
+                Log.i("GPS: latitude", String.valueOf(latitude));
+                Log.i("GPS: longitude", String.valueOf(longitude));
+            }
+
+
             if (repeating_test) {
                 //If test has already been filled, we delete the last entry from the database
                 String selection =

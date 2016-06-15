@@ -15,9 +15,10 @@ public class FeedTestDbHelper extends SQLiteOpenHelper {
 
     // If you change the database schema, you must increment the database version.
 
-    public static final int DATABASE_VERSION = 4;
+    public static final int DATABASE_VERSION = 5;
     public static final String DATABASE_NAME = "FeedTest.db";
     private static final String INTEGER_TYPE = " INTEGER";
+    private static final String REAL_TYPE = " REAL";
     private static final String TIMESTAMP_TYPE = " TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
     private static final String COMMA_SEP = ",";
     private static final String SQL_CREATE_ENTRIES =
@@ -40,7 +41,9 @@ public class FeedTestDbHelper extends SQLiteOpenHelper {
                     FeedTestContract.FeedEntry.COLUMN_NAME_Q12 + INTEGER_TYPE + COMMA_SEP +
                     FeedTestContract.FeedEntry.COLUMN_NAME_Q13 + INTEGER_TYPE + COMMA_SEP +
                     FeedTestContract.FeedEntry.COLUMN_NAME_Q14 + INTEGER_TYPE + COMMA_SEP +
-                    FeedTestContract.FeedEntry.COLUMN_NAME_TIMESTAMP + TIMESTAMP_TYPE +
+                    FeedTestContract.FeedEntry.COLUMN_NAME_TIMESTAMP + TIMESTAMP_TYPE + COMMA_SEP +
+                    FeedTestContract.FeedEntry.COLUMN_LATITUDE + REAL_TYPE + COMMA_SEP +
+                    FeedTestContract.FeedEntry.COLUMN_LONGITUDE + REAL_TYPE +
                     " )";
     private static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + FeedTestContract.FeedEntry.TABLE_NAME;
