@@ -74,7 +74,7 @@ public class TestActivity extends AppCompatActivity {
         tp13.setIs24HourView(true);
         tp14.setIs24HourView(true);
 
-        prepareNumberPicker(R.id.question8_rating);
+        prepareCaffeineNumberPicker(R.id.question8_rating);
         prepareNumberPicker(R.id.question9_rating);
         prepareNumberPicker(R.id.question10_rating);
 
@@ -117,11 +117,11 @@ public class TestActivity extends AppCompatActivity {
                 ((RadioButton) r7.getChildAt(c.getInt(7))).setChecked(true);
 
                 NumberPicker r8 = (NumberPicker) findViewById(R.id.question8_rating);
-                r8.setValue(c.getInt(8) - 1);
+                r8.setValue(c.getInt(8)/10 + 1);
                 NumberPicker r9 = (NumberPicker) findViewById(R.id.question9_rating);
-                r9.setValue(c.getInt(9) - 1);
+                r9.setValue(c.getInt(9) + 1);
                 NumberPicker r10 = (NumberPicker) findViewById(R.id.question10_rating);
-                r10.setValue(c.getInt(10) - 1);
+                r10.setValue(c.getInt(10) + 1);
 
                 RadioGroup r11 = (RadioGroup) findViewById(R.id.question11_rating);
                 ((RadioButton) r11.getChildAt(c.getInt(11))).setChecked(true);
@@ -273,13 +273,13 @@ public class TestActivity extends AppCompatActivity {
             }
         }
 
-        // Check question 8 (EditText)
+        // Check question 8 (NumberPicker)
         error = NumberPickerAnswered(7, R.id.question8_rating, R.id.question8, error);
 
-        // Check question 9 (EditText)
+        // Check question 9 (NumberPicker)
         error = NumberPickerAnswered(8, R.id.question9_rating, R.id.question9, error);
 
-        // Check question 10 (EditText)
+        // Check question 10 (NumberPicker)
         error = NumberPickerAnswered(9, R.id.question10_rating, R.id.question10, error);
 
 
@@ -406,15 +406,15 @@ public class TestActivity extends AppCompatActivity {
                 return tv;
             }
         } else {
-            questions[i] = value + 1;
+            questions[i] = ((i == 7) ? (value - 1) * 10 : (value - 1));
             tv.setError(null);
         }
         return error;
     }
 
     /**
-     * Customizes the options shown in the {@link NumberPicker}s to represent i with the string i -1
-     * and 0 with a blank option
+     * Customizes the options shown in the {@link NumberPicker}s to represent i with the string
+     * i - 1 and 0 with a blank option
      *
      * @param id
      */
@@ -428,6 +428,27 @@ public class TestActivity extends AppCompatActivity {
             public String format(int i) {
                 if (i == 0) return " ";
                 return String.valueOf(i - 1);
+            }
+        });
+    }
+
+    /**
+     * Customizes the options shown in the {@link NumberPicker}s to represent i with the string
+     * (i - 1) * 10 and 0 with a blank option. That means that the step for the caffeine is 10
+     * instead of 1
+     *
+     * @param id
+     */
+    private void prepareCaffeineNumberPicker(int id) {
+        NumberPicker np = (NumberPicker) findViewById(id);
+        np.setMinValue(0);
+        np.setMaxValue(10010);
+        np.setWrapSelectorWheel(false);
+        np.setFormatter(new NumberPicker.Formatter() {
+            @Override
+            public String format(int i) {
+                if (i == 0) return " ";
+                return String.valueOf((i - 1) * 10);
             }
         });
     }
