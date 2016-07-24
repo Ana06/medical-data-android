@@ -63,6 +63,28 @@
                 android:layout_alignRight="@+id/hl"
                 android:layout_alignEnd="@+id/hl" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:maxWidth="260dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/configuration_location"
+                android:id="@+id/configuration2"
+                android:layout_below="@+id/configuration1"
+                android:layout_alignLeft="@+id/configuration1"
+                android:layout_alignStart="@+id/configuration1"
+                android:layout_marginTop="10dp" />
+
+            <CheckBox
+                android:id="@+id/checkBox_Location_Id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:onClick="onCheckBoxLocationClick"
+                android:layout_alignBottom="@+id/configuration2"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
         </RelativeLayout>
     </FrameLayout>
 </ScrollView>
