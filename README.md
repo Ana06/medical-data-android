@@ -28,7 +28,7 @@ This project adhere to the official [Android Code Style Guidelines](http://sourc
 
 ## Authors
 
-The development of this project was started by Ana María Martínez Gómez, but contributors are welcome! You can see all contributors here: [contributors](https://github.com/Ana06/medical-data-android/graphs/contributors).
+The development of this project was started by Ana María Martínez Gómez, but contributors are welcome! You can see all contributors here: [contributors](https://github.com/Ana06/medical-data-android/graphs/contributors). And if you want to contribute, please read the [CONTRIBUTING guide](https://github.com/Ana06/medical-data-android/blob/master/CONTRIBUTING.md).
 
 
 ## Licence
