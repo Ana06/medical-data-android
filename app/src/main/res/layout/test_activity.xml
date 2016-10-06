@@ -724,6 +724,19 @@
 
             <!-- Errors -->
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Answers can be changed even after submission."
+                android:layout_below="@+id/button_finish"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:textColor="@color/colorPrimary"/>
+
+            <!-- Errors -->
+            <TextView
                 android:id="@+id/errors"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
