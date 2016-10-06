@@ -53,6 +53,9 @@ public class RegisterActivity extends AppCompatActivity {
         ss.setSpan(new MyClickableSpan(), terms1.length(), terms1.length() + terms2.length() + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);//0 to 7 Android is clickable
         tv.setText(ss);
         tv.setMovementMethod(LinkMovementMethod.getInstance());
+
+        DatePicker birthDate = (DatePicker) findViewById(R.id.age_answer);
+        birthDate.updateDate(1985, 9, 4);
     }
 
     /**
