@@ -164,6 +164,7 @@ public class RegisterActivity extends AppCompatActivity {
                         // Feedback: register has been completed
                         Intent intent = new Intent(this, FinishRegisterActivity.class);
                         startActivity(intent);
+                        finish();
                     } else if (option == 1) {
                         Toast.makeText(this, R.string.repeated_email, Toast.LENGTH_LONG).show();
                     } else {
@@ -173,7 +174,6 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(this, R.string.register_error, Toast.LENGTH_LONG).show();
                 }
                 Variables.hideKeyboard(this);
-                finish();
             }
         }
     }
