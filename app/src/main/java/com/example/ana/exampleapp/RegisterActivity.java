@@ -1,25 +1,23 @@
 package com.example.ana.exampleapp;
 
-import java.lang.String;
-
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.os.Build;
-import android.content.Intent;
-import android.view.View;
-import android.widget.DatePicker;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.EditText;
-import android.widget.CheckBox;
-import android.widget.RadioGroup;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.SpannableString;
-import android.text.TextPaint;
 import android.text.Spanned;
+import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
+import android.view.View;
+import android.widget.CheckBox;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mongodb.MongoClient;
@@ -27,10 +25,9 @@ import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
-import static com.mongodb.client.model.Filters.eq;
-
-
 import org.bson.Document;
+
+import static com.mongodb.client.model.Filters.eq;
 
 /**
  * This activity allows a user to register in the app by asking his name, email, age, gender and a
@@ -251,9 +248,9 @@ public class RegisterActivity extends AppCompatActivity {
         @Override
         protected Integer doInBackground(User... params) {
             try {
-                MongoClientURI mongoClientURI = new MongoClientURI(Variables.mongo_uri);
-                MongoClient mongoClient = new MongoClient(mongoClientURI);
-                MongoDatabase dbMongo = mongoClient.getDatabase(mongoClientURI.getDatabase());
+                //MongoClientURI mongoClientURI = new MongoClientURI(Variables.mongo_uri);
+                MongoClient mongoClient = new MongoClient(new MongoClientURI(Variables.mongo_uri));
+                MongoDatabase dbMongo = mongoClient.getDatabase("test");
                 MongoCollection<Document> coll = dbMongo.getCollection("users");
                 User local_user = params[0];
                 if (coll.find(eq("email", local_user.getEmail())).first() != null) {

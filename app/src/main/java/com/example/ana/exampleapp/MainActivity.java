@@ -1,14 +1,13 @@
 package com.example.ana.exampleapp;
 
-import java.util.Calendar;
-import java.util.Date;
-
-import android.support.v7.app.AppCompatActivity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.content.Intent;
-import android.content.Context;
-import android.content.SharedPreferences;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
@@ -16,8 +15,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.widget.Toast;
 
 import com.mongodb.MongoClient;
@@ -26,6 +23,9 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
 import org.bson.Document;
+
+import java.util.Calendar;
+import java.util.Date;
 
 import static com.mongodb.client.model.Filters.eq;
 
@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         settings = getSharedPreferences(Variables.PREFS_NAME, Context.MODE_PRIVATE);
         FeedTestDbHelper mDbHelper = new FeedTestDbHelper(this);
         readable_db = mDbHelper.getReadableDatabase();
+
         setMainView();
     }
 
@@ -70,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
      * the database last entry.
      */
     private void setMainView() {
-        boolean firstTime = settings.getBoolean("firstTime", true);
+        boolean firstTime = settings.getBoolean("firstTime", false);
         if (firstTime) {
             setContentView(R.layout.activity_main_first_time);
         } else {
