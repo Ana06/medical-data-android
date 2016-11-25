@@ -182,7 +182,6 @@ public class MainActivity extends AppCompatActivity {
         notification.setContentText("This is the message");
 
         NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
-
         String[] events = new String[6];
 
         inboxStyle.setBigContentTitle("Event tracker details:");
@@ -190,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
         for (int i=0; i < events.length; i++) {
 
             //inboxStyle.addLine(events[i]);
-            inboxStyle.addLine("String" + i);
+            inboxStyle.addLine("String " + i);
         }
 
         Intent notifIntent = new Intent(this, MainActivity.class);
