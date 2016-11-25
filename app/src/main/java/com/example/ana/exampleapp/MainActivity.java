@@ -1,5 +1,7 @@
 package com.example.ana.exampleapp;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -7,6 +9,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -47,12 +50,19 @@ public class MainActivity extends AppCompatActivity {
     int pin_tries = 0;
     EditText pinEditText;
 
+
+    NotificationCompat.Builder notification;
+    private static final int uniqueID = 45612;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         settings = getSharedPreferences(Variables.PREFS_NAME, Context.MODE_PRIVATE);
         FeedTestDbHelper mDbHelper = new FeedTestDbHelper(this);
         readable_db = mDbHelper.getReadableDatabase();
+
+        notification = new NotificationCompat.Builder(this);
+        notification.setAutoCancel(true);
 
         setMainView();
     }
@@ -165,7 +175,21 @@ public class MainActivity extends AppCompatActivity {
      * @param view the {@link View} that calls the method
      */
     public void btnStart(View view) {
-        int pin = settings.getInt("pin", 0);
+        notification.setSmallIcon(R.drawable.rectangle);
+        notification.setTicker("This is the ticker");
+        notification.setWhen(System.currentTimeMillis());
+        notification.setContentTitle("This is the title");
+        notification.setContentText("This is the message");
+
+        Intent intent = new Intent(this, MainActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        notification.setContentIntent(pendingIntent);
+
+        NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        nm.notify(uniqueID, notification.build());
+
+
+        /**int pin = settings.getInt("pin", 0);
         String pinText = pinEditText.getText().toString();
         pin_tries++;
         if (!pinText.equals("") && pin == Integer.parseInt(pinText)) {
@@ -181,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
             startTime = -1;
             pinEditText.setText("");
             pinEditText.setError(getString(R.string.pin_error));
-        }
+        }**/
     }
 
     /**
