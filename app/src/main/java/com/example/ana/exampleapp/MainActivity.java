@@ -181,15 +181,26 @@ public class MainActivity extends AppCompatActivity {
         notification.setContentTitle("This is the title");
         notification.setContentText("This is the message");
 
-        Intent intent = new Intent(this, MainActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
+        String[] events = new String[6];
+
+        inboxStyle.setBigContentTitle("Event tracker details:");
+
+        for (int i=0; i < events.length; i++) {
+
+            //inboxStyle.addLine(events[i]);
+            inboxStyle.addLine("String " + i);
+        }
+
+        Intent notifIntent = new Intent(this, MainActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notifIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        notification.setStyle(inboxStyle);
         notification.setContentIntent(pendingIntent);
 
         NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         nm.notify(uniqueID, notification.build());
 
-
-        /**int pin = settings.getInt("pin", 0);
+        int pin = settings.getInt("pin", 0);
         String pinText = pinEditText.getText().toString();
         pin_tries++;
         if (!pinText.equals("") && pin == Integer.parseInt(pinText)) {
@@ -205,7 +216,7 @@ public class MainActivity extends AppCompatActivity {
             startTime = -1;
             pinEditText.setText("");
             pinEditText.setError(getString(R.string.pin_error));
-        }**/
+        }
     }
 
     /**
