@@ -1,4 +1,4 @@
-package com.example.ana.exampleapp;
+﻿package com.example.ana.exampleapp;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -169,17 +170,38 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * Creates a ticker to remind the user to take their medication
+     * at the specified time (epooch time milliseconds)
+     * @return
+     */
+    public NotificationCompat.Builder medicationNotification(long tickerTime){
+        NotificationCompat.Builder notif = new NotificationCompat.Builder(this);
+        notif.setAutoCancel(false);
+        notif.setTicker("Remember to take your daily dose of medication");
+        notif.setWhen(tickerTime);
+        return notif;
+    }
+
+    /**
+     * Triggers a notification to remind the user to update their information
+     * @return
+     */
+    public NotificationCompat.Builder updateInfoNotification(){
+        NotificationCompat.Builder notif = new NotificationCompat.Builder(this);
+        notif.setAutoCancel(false);
+        notif.setContentText("Please update your medical information");
+        notif.setContentTitle("Information Update Required");
+        notif.setWhen(System.currentTimeMillis());
+        return notif;
+    }
+
+    /**
      * Check if the introduced PIN is correct and in that case saves the time spent to do it and
      * creates a {@link TestActivity}. Otherwise it set an error on the PIN {@link EditText}.
      *
      * @param view the {@link View} that calls the method
      */
     public void btnStart(View view) {
-        notification.setSmallIcon(R.drawable.rectangle);
-        notification.setTicker("This is the ticker");
-        notification.setWhen(System.currentTimeMillis());
-        notification.setContentTitle("This is the title");
-        notification.setContentText("This is the message");
 
         NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
         String[] events = new String[6];
