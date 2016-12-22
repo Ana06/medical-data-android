@@ -274,6 +274,9 @@ public class MainActivity extends AppCompatActivity {
                 int pin_number = Integer.parseInt(pin.getText().toString());
                 User user = new User(email_text, pin_number);
 
+                // Request an information update from the user
+                updateInfoNotification()
+                
                 //Save register in the server database
                 try {
                     DownloadRegistration runner = new DownloadRegistration();
