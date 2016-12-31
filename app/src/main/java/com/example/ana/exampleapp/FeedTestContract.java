@@ -23,6 +23,7 @@ public final class FeedTestContract {
 
     /**
      * Given a {@link Timestamp} returns a boolean indicating if its belongs to today or not.
+     * Source: http://stackoverflow.com/a/7930591/6245337 by Fred
      *
      * @param timestamp A {@link Timestamp}
      * @return <code>true</code>if the timestamp belongs to today; <code>false</code>

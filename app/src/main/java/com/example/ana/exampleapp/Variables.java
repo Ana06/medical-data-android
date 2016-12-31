@@ -39,7 +39,8 @@ public final class Variables {
     }
 
     /**
-     * Hide the keyboard and clear focus
+     * Hide the keyboard and clear focus. 
+     * Source: http://stackoverflow.com/a/1109108/6245337 by Reto Meier
      *
      * @param activity the activity where we want to hide the keyboard and clear focus
      */
