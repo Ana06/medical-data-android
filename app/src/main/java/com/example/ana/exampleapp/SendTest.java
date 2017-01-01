@@ -159,8 +159,8 @@ class SendTest extends AsyncTask<Context, Void, Boolean> {
     private Document getDoc(Cursor c, ObjectId user_id, Boolean isFemale, Date date) throws java.text.ParseException {
         boolean drugs = (c.getInt(14) == 1);
         Document document = new Document()
-                .append("user_id", user_id) // check pinters
-                .append("date", date) //convert to date
+                .append("user_id", user_id) // Check pinters
+                .append("date", date) // Convert to date
                 .append("speedReaction", new Document()
                         .append("last", c.getInt(1))
                         .append("total", c.getInt(2))

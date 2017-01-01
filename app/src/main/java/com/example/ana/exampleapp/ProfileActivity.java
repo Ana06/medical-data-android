@@ -144,7 +144,7 @@ public class ProfileActivity extends AppCompatActivity {
                 runner.execute(user);
                 int option = runner.get();
                 if (option == 0) {
-                    //Save register in the app
+                    // Save register in the app
                     user.save(this);
                     // Feedback: update profile has been completed
                     Toast.makeText(this, R.string.changes_saved, Toast.LENGTH_LONG).show();
@@ -170,7 +170,7 @@ public class ProfileActivity extends AppCompatActivity {
      * @param tv_id id of the {@link TextView} which is the title of et.
      */
     private void focusFirstError(EditText et, int tv_id) {
-        et.clearFocus(); // requestRectangle does not work properly if et is focused
+        et.clearFocus(); // requestRectangle does not work properly if et is already focused
         et.requestFocus();
         TextView title = (TextView) findViewById(tv_id);
         RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) title.getLayoutParams();
@@ -218,11 +218,11 @@ public class ProfileActivity extends AppCompatActivity {
          */
         public void updateDrawState(TextPaint ds) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                ds.setColor(getResources().getColor(R.color.colorAccent, null));//set text color
+                ds.setColor(getResources().getColor(R.color.colorAccent, null));// Set text color
             } else {
-                ds.setColor(getResources().getColor(R.color.colorAccent));//set text color
+                ds.setColor(getResources().getColor(R.color.colorAccent));// Set text color
             }
-            ds.setUnderlineText(false); // set to false to remove underline
+            ds.setUnderlineText(false); // Set to false to remove underline
         }
     }
 

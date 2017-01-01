@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                     null,
                     null,
                     FeedTestContract.FeedEntry._ID + " DESC", "1");
-            boolean moved = c.moveToFirst(); //false if it is empty
+            boolean moved = c.moveToFirst(); // false if it is empty
             if (moved && FeedTestContract.isToday(c.getString(0))) {
                 // Test has already been filled
                 Button button = (Button) findViewById(R.id.button_start);

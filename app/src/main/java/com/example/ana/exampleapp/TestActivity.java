@@ -173,7 +173,7 @@ public class TestActivity extends AppCompatActivity {
 
         allowLocation = settings.getBoolean("Location_enabled", true);
         if (allowLocation) {
-            //if api > 23 then the user must grant the permission to access the network or location
+            // If api > 23 then the user must grant the permission to access the network or location
             boolean checkVersion = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M;
             boolean checkAccessFineLocation = ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED;
             boolean checkCoarseLocation = ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED;
@@ -197,10 +197,10 @@ public class TestActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         if (requestCode == 1) {
-            //User accepted to share his location
+            // User accepted to share his location
             handleLocation();
         } else {
-            //the user decided no to accept to share his location.
+            // The user decided no to accept to share his location.
             allowLocation = false;
         }
     }
@@ -210,7 +210,7 @@ public class TestActivity extends AppCompatActivity {
      * retrieve location from network or gps
      */
     private void handleLocation() {
-        //Add the location (latitude;longitude) to the db
+        // Add the location (latitude;longitude) to the db
         gps = new GPSManager(TestActivity.this);
         // check if GPS enabled
         if (gps.canGetLocation()) {
@@ -383,7 +383,7 @@ public class TestActivity extends AppCompatActivity {
             for (int i = 0; i < questions.length; i++)
                 values.put(FeedTestContract.QUESTION_COLUMNS_NAMES[i], questions[i]);
 
-            //Add the location (latitude;longitude) to the db
+            // Add the location (latitude;longitude) to the db
             if (allowLocation) {
                 values.put(FeedTestContract.FeedEntry.COLUMN_LATITUDE, latitude);
                 values.put(FeedTestContract.FeedEntry.COLUMN_LONGITUDE, longitude);
@@ -393,7 +393,7 @@ public class TestActivity extends AppCompatActivity {
 
 
             if (repeating_test) {
-                //If test has already been filled, we delete the last entry from the database
+                // If test has already been filled, we delete the last entry from the database
                 String selection =
                         "_ID = (SELECT MAX(_ID) FROM " + FeedTestContract.FeedEntry.TABLE_NAME + ")";
                 db.delete(FeedTestContract.FeedEntry.TABLE_NAME, selection, null);

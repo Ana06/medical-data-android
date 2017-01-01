@@ -28,7 +28,7 @@ public class ConfigurationActivity extends AppCompatActivity {
         isChecked = !(settings.getBoolean("only_wifi", false));
         final CheckBox checkBox = (CheckBox) findViewById(R.id.checkbox_id);
         checkBox.setChecked(isChecked);
-        //Location
+        // Location
         isLocationChecked = (settings.getBoolean("Location_enabled",true));
         final CheckBox locationCheckbox = (CheckBox) findViewById(R.id.checkBox_Location_Id);
         locationCheckbox.setChecked(isLocationChecked);

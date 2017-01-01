@@ -45,7 +45,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_activity);
 
-        //allow a part of the terms and conditions text to be clickable.
+        // Allow a part of the terms and conditions text to be clickable.
         TextView tv = (TextView) findViewById(R.id.terms_text);
         String terms1 = getString(R.string.terms1);
         String terms2 = getString(R.string.terms2);

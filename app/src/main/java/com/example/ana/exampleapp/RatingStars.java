@@ -23,7 +23,7 @@ public abstract class RatingStars extends LinearLayout implements OnClickListene
     protected int pink = 10; //not selected = 10
     protected int answer = 10; //not selected = 10
     protected int[] color_numbers = new int[]{};
-    protected int[] non_color_numbers; //initialized in the inheriting classes
+    protected int[] non_color_numbers; // Initialized in the inheriting classes
 
     /**
      * Class constructor.
