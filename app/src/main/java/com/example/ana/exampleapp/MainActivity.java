@@ -1,14 +1,17 @@
-package com.example.ana.exampleapp;
+﻿package com.example.ana.exampleapp;
 
-import java.util.Calendar;
-import java.util.Date;
-
-import android.support.v7.app.AppCompatActivity;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.content.Intent;
-import android.content.Context;
-import android.content.SharedPreferences;
+import android.os.SystemClock;
+import android.support.v4.app.NotificationCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
@@ -16,8 +19,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.widget.Toast;
 
 import com.mongodb.MongoClient;
@@ -26,6 +27,9 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
 import org.bson.Document;
+
+import java.util.Calendar;
+import java.util.Date;
 
 import static com.mongodb.client.model.Filters.eq;
 
@@ -47,12 +51,20 @@ public class MainActivity extends AppCompatActivity {
     int pin_tries = 0;
     EditText pinEditText;
 
+
+    NotificationCompat.Builder notification;
+    private static final int uniqueID = 45612;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         settings = getSharedPreferences(Variables.PREFS_NAME, Context.MODE_PRIVATE);
         FeedTestDbHelper mDbHelper = new FeedTestDbHelper(this);
         readable_db = mDbHelper.getReadableDatabase();
+
+        notification = new NotificationCompat.Builder(this);
+        notification.setAutoCancel(true);
+
         setMainView();
     }
 
@@ -70,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
      * the database last entry.
      */
     private void setMainView() {
-        boolean firstTime = settings.getBoolean("firstTime", true);
+        boolean firstTime = settings.getBoolean("firstTime", false);
         if (firstTime) {
             setContentView(R.layout.activity_main_first_time);
         } else {
@@ -158,12 +170,58 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * Creates a ticker to remind the user to take their medication
+     * at the specified time (epooch time milliseconds)
+     * @return
+     */
+    public NotificationCompat.Builder medicationNotification(long tickerTime){
+        NotificationCompat.Builder notif = new NotificationCompat.Builder(this);
+        notif.setAutoCancel(false);
+        notif.setTicker("Remember to take your daily dose of medication");
+        notif.setWhen(tickerTime);
+        return notif;
+    }
+
+    /**
+     * Triggers a notification to remind the user to update their information
+     * @return
+     */
+    public NotificationCompat.Builder updateInfoNotification(){
+        NotificationCompat.Builder notif = new NotificationCompat.Builder(this);
+        notif.setAutoCancel(false);
+        notif.setContentText("Please update your medical information");
+        notif.setContentTitle("Information Update Required");
+        notif.setWhen(System.currentTimeMillis());
+        return notif;
+    }
+
+    /**
      * Check if the introduced PIN is correct and in that case saves the time spent to do it and
      * creates a {@link TestActivity}. Otherwise it set an error on the PIN {@link EditText}.
      *
      * @param view the {@link View} that calls the method
      */
     public void btnStart(View view) {
+
+        NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
+        String[] events = new String[6];
+
+        inboxStyle.setBigContentTitle("Event tracker details:");
+
+        for (int i=0; i < events.length; i++) {
+
+            //inboxStyle.addLine(events[i]);
+            inboxStyle.addLine("String " + i);
+        }
+
+        Intent notifIntent = new Intent(this, MainActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notifIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        notification.setStyle(inboxStyle);
+        notification.setContentIntent(pendingIntent);
+
+        NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        nm.notify(uniqueID, notification.build());
+
         int pin = settings.getInt("pin", 0);
         String pinText = pinEditText.getText().toString();
         pin_tries++;
@@ -216,6 +274,9 @@ public class MainActivity extends AppCompatActivity {
                 int pin_number = Integer.parseInt(pin.getText().toString());
                 User user = new User(email_text, pin_number);
 
+                // Request an information update from the user
+                updateInfoNotification()
+                
                 //Save register in the server database
                 try {
                     DownloadRegistration runner = new DownloadRegistration();

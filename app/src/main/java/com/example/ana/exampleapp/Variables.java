@@ -17,14 +17,13 @@ import android.view.inputmethod.InputMethodManager;
  */
 public final class Variables {
     // The server IP
-    private static final String IP = "IP";
+    private static final String IP = "localhost";
     private static final String PORT = "27017";
     // MongoDB uri with the IP, authentication (user, password and mechanism), database, etc.
-    public static final String mongo_uri = "mongodb://androidUser:password@" + IP + ":" + PORT +
-            "/bipolarDatabase?authMechanism=MONGODB-CR";
+    //public static final String mongo_uri = "mongodb://127.0.0.1:27017/test";
 
     //used for test purpose!
-    //public static final String mongo_uri = "mongodb://" + IP + ":" + PORT + "/test";
+    public static final String mongo_uri = "mongodb://" + IP + ":" + PORT + "/test";
 
     // Name of shared preferences file;
     public static final String PREFS_NAME = "MyPrefsFile";
