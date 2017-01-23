@@ -2,7 +2,7 @@
 
 Android app to collect data to be analyzed for medical purposes. Its development was started as part of a final degree project at [UCM](https://www.ucm.es) which can be found here: [System to predict bipolar disorder crises analysing massive data by Ana María Martínez](http://eprints.ucm.es/38722). This mobile app is being used in the project [Bip4cast](http://www.bip4cast.org), in which data of patients from the [San Juan de Dios hospital](http://www.nuestraseñoradelapaz.es) is being collected with the objective of improving the treatment of the bipolar disorder whose crises that can be avoided through early prediction.
 
-**Bip4cast.apk** can be used to install the last stable version of the app in your Android device. Screenshots of the application in a device with Android 6.0.1 can be seen in [screenshots](https://github.com/Ana06/medical-data-android/tree/master/screenshots) and [screenshots_ES](https://github.com/Ana06/medical-data-android/tree/master/screenshots_ES). Also, a video of the app in the same device can be seen in the following link: [https://youtu.be/InZCw9WAZzI](https://youtu.be/InZCw9WAZzI).
+**Bip4cast.apk** can be used to install the last stable version of the app in your Android device. In case that you want to set the project you should read the [HOW TO guide](https://github.com/Ana06/medical-data-android/blob/master/HOWTO.md). Screenshots of the application in a device with Android 6.0.1 can be seen in [screenshots](https://github.com/Ana06/medical-data-android/tree/master/screenshots) and [screenshots_ES](https://github.com/Ana06/medical-data-android/tree/master/screenshots_ES). Also, a video of the app in the same device can be seen in the following link: [https://youtu.be/InZCw9WAZzI](https://youtu.be/InZCw9WAZzI).
 
 <img src=/screenshots/main.jpg width=384 height=640 alt='Main screen' />
 <img src=/screenshots/test.jpg width=384 height=640 alt='Daily test' />
@@ -30,7 +30,7 @@ This project adhere to the official [Android Code Style Guidelines](http://sourc
 
 ## Authors
 
-The development of this project was started by Ana María Martínez Gómez, but contributors are welcome! You can see all contributors here: [contributors](https://github.com/Ana06/medical-data-android/graphs/contributors). And if you want to contribute, please read the [CONTRIBUTING guide](https://github.com/Ana06/medical-data-android/blob/master/CONTRIBUTING.md).
+The development of this project was started by Ana María Martínez Gómez and you can see all contributors here: [contributors](https://github.com/Ana06/medical-data-android/graphs/contributors). Nobody is reviewing pull requests at the moment, but in case that you want to develop this project by yourself you can read the [HOW TO guide](https://github.com/Ana06/medical-data-android/blob/master/HOWTO.md).
 
 
 ## Licence
