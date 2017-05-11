@@ -34,14 +34,13 @@
             <!-- question 1 - help icon -->
             <ImageView
                 android:id="@+id/question1_help"
-                android:src="@android:drawable/ic_menu_help"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:src="@drawable/help_icon"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_alignBottom="@+id/question1"
                 android:layout_toEndOf="@+id/question1"
                 android:layout_toRightOf="@+id/question1"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="15dp"
                 android:contentDescription="@+id/help"
                 android:onClick="btnHelp"/>
 
@@ -72,21 +71,20 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/question2"
                 android:layout_below="@+id/question1_rating"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="35dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
 
             <!-- question 2 - help icon -->
             <ImageView
                 android:id="@+id/question2_help"
-                android:src="@android:drawable/ic_menu_help"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:src="@drawable/help_icon"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_alignBottom="@+id/question2"
                 android:layout_toEndOf="@+id/question2"
                 android:layout_toRightOf="@+id/question2"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="15dp"
                 android:contentDescription="@+id/help"
                 android:onClick="btnHelp" />
 
@@ -118,7 +116,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/question3"
                 android:layout_below="@+id/question2_rating"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="35dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:stepSize="1"/>
@@ -126,14 +124,13 @@
             <!-- question 3 - help icon -->
             <ImageView
                 android:id="@+id/question3_help"
-                android:src="@android:drawable/ic_menu_help"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:src="@drawable/help_icon"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_alignBottom="@+id/question3"
                 android:layout_toEndOf="@+id/question3"
                 android:layout_toRightOf="@+id/question3"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="15dp"
                 android:contentDescription="@+id/help"
                 android:onClick="btnHelp" />
 
@@ -164,21 +161,20 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/question4"
                 android:layout_below="@+id/question3_rating"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="35dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
 
             <!-- question 4 - help icon -->
             <ImageView
                 android:id="@+id/question4_help"
-                android:src="@android:drawable/ic_menu_help"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:src="@drawable/help_icon"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_alignBottom="@+id/question4"
                 android:layout_toEndOf="@+id/question4"
                 android:layout_toRightOf="@+id/question4"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
                 android:contentDescription="@+id/help"
                 android:onClick="btnHelp"/>
 
@@ -209,21 +205,20 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/question5"
                 android:layout_below="@+id/question4_rating"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="35dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
 
             <!-- question 5 - help icon -->
             <ImageView
                 android:id="@+id/question5_help"
-                android:src="@android:drawable/ic_menu_help"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:src="@drawable/help_icon"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_alignBottom="@+id/question5"
                 android:layout_toEndOf="@+id/question5"
                 android:layout_toRightOf="@+id/question5"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="15dp"
                 android:contentDescription="@+id/help"
                 android:onClick="btnHelp"/>
 
@@ -254,21 +249,20 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/question6"
                 android:layout_below="@+id/question5_rating"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="35dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
 
             <!-- question 6 - help icon -->
             <ImageView
                 android:id="@+id/question6_help"
-                android:src="@android:drawable/ic_menu_help"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:src="@drawable/help_icon"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_alignBottom="@+id/question6"
                 android:layout_toEndOf="@+id/question6"
                 android:layout_toRightOf="@+id/question6"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="15dp"
                 android:contentDescription="@+id/help"
                 android:onClick="btnHelp"/>
 
@@ -303,21 +297,20 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="@string/question7"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="35dp"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true" />
 
                 <!-- question 7 - help icon -->
                 <ImageView
                     android:id="@+id/question7_help"
-                    android:src="@android:drawable/ic_menu_help"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:src="@drawable/help_icon"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_alignBottom="@+id/question7"
                     android:layout_toEndOf="@+id/question7"
                     android:layout_toRightOf="@+id/question7"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="18dp"
                     android:contentDescription="@+id/help"
                     android:onClick="btnHelp"/>
 
@@ -366,21 +359,20 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/question8"
                 android:layout_below="@+id/question7_layout"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="35dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
 
             <!-- question 8 - help icon -->
             <ImageView
                 android:id="@+id/question8_help"
-                android:src="@android:drawable/ic_menu_help"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:src="@drawable/help_icon"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_alignBottom="@+id/question8"
                 android:layout_toEndOf="@+id/question8"
                 android:layout_toRightOf="@+id/question8"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="15dp"
                 android:contentDescription="@+id/help"
                 android:onClick="btnHelp"/>
 
@@ -411,21 +403,20 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/question9"
                 android:layout_below="@+id/question8_rating"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="35dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
 
             <!-- question 9 - help icon -->
             <ImageView
                 android:id="@+id/question9_help"
-                android:src="@android:drawable/ic_menu_help"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:src="@drawable/help_icon"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_alignBottom="@+id/question9"
                 android:layout_toEndOf="@+id/question9"
                 android:layout_toRightOf="@+id/question9"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
                 android:contentDescription="@+id/help"
                 android:onClick="btnHelp"/>
 
@@ -456,21 +447,20 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/question10"
                 android:layout_below="@+id/question9_rating"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="35dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
 
             <!-- question 10 - help icon -->
             <ImageView
                 android:id="@+id/question10_help"
-                android:src="@android:drawable/ic_menu_help"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:src="@drawable/help_icon"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_alignBottom="@+id/question10"
                 android:layout_toEndOf="@+id/question10"
                 android:layout_toRightOf="@+id/question10"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="15dp"
                 android:contentDescription="@+id/help"
                 android:onClick="btnHelp"/>
 
@@ -501,21 +491,20 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/question11"
                 android:layout_below="@+id/question10_rating"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="35dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
 
             <!-- question 11 - help icon -->
             <ImageView
                 android:id="@+id/question11_help"
-                android:src="@android:drawable/ic_menu_help"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:src="@drawable/help_icon"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_alignBottom="@+id/question11"
                 android:layout_toEndOf="@+id/question11"
                 android:layout_toRightOf="@+id/question11"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="15dp"
                 android:contentDescription="@+id/help"
                 android:onClick="btnHelp"/>
 
@@ -563,21 +552,20 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/question12"
                 android:layout_below="@+id/question11_rating"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="35dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
 
             <!-- question 12 - help icon -->
             <ImageView
                 android:id="@+id/question12_help"
-                android:src="@android:drawable/ic_menu_help"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:src="@drawable/help_icon"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_alignBottom="@+id/question12"
                 android:layout_toEndOf="@+id/question12"
                 android:layout_toRightOf="@+id/question12"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="15dp"
                 android:contentDescription="@+id/help"
                 android:onClick="btnHelp"/>
 
@@ -612,21 +600,20 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/question13"
                 android:layout_below="@+id/question12_rating"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="35dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
 
             <!-- question 13 - help icon -->
             <ImageView
                 android:id="@+id/question13_help"
-                android:src="@android:drawable/ic_menu_help"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:src="@drawable/help_icon"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_alignBottom="@+id/question13"
                 android:layout_toEndOf="@+id/question13"
                 android:layout_toRightOf="@+id/question13"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="15dp"
                 android:contentDescription="@+id/help"
                 android:onClick="btnHelp"/>
 
@@ -660,21 +647,20 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/question14"
                 android:layout_below="@+id/question13_rating"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="35dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
 
             <!-- question 14 - help icon -->
             <ImageView
                 android:id="@+id/question14_help"
-                android:src="@android:drawable/ic_menu_help"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:src="@drawable/help_icon"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_alignBottom="@+id/question14"
                 android:layout_toEndOf="@+id/question14"
                 android:layout_toRightOf="@+id/question14"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="15dp"
                 android:contentDescription="@+id/help"
                 android:onClick="btnHelp"/>
 
